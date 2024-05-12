@@ -206,30 +206,5 @@ void ACPlayer::OnSkillList()
 	//}
 
 	CheckNull(SkillHUDWidget);
-
-	if (bOpenSkillList)
-	{
-		SkillHUDWidget->CloseSkillListWidget();
-		bOpenSkillList = false;
-
-		FInputModeGameOnly inputMode;
-		APlayerController* controller = Cast<APlayerController>(GetController());
-		CheckNull(controller);
-
-		controller->bShowMouseCursor = false;
-		controller->SetInputMode(inputMode);
-	}
-	else
-	{
-		SkillHUDWidget->OpenSkillListWidget();
-		bOpenSkillList = true;
-
-		FInputModeGameAndUI inputMode;
-		APlayerController* controller = Cast<APlayerController>(GetController());
-		CheckNull(controller);
-
-		controller->bShowMouseCursor = true;
-		controller->SetInputMode(inputMode);
-	}
-
+	SkillHUDWidget->ControlSkillListWidget();
 }

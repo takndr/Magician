@@ -4,14 +4,16 @@
 
 #include "Global.h"
 
-void UCMainWidget::OpenSkillListWidget()
+void UCMainWidget::ControlSkillListWidget()
 {
-	SkillList->SetVisibility(ESlateVisibility::Visible);
-}
-
-void UCMainWidget::CloseSkillListWidget()
-{
-	SkillList->SetVisibility(ESlateVisibility::Collapsed);
+	if (SkillList->IsOpened())
+	{
+		SkillList->Detach();
+	}
+	else
+	{
+		SkillList->Attach();
+	}
 }
 
 void UCMainWidget::SetSkillList(class UCSkillData* SkillData)

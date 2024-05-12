@@ -21,6 +21,8 @@ void UCSkillWidget::NativeConstruct()
 	{
 		SkillDownButton->OnClicked.AddDynamic(this, &UCSkillWidget::OnSkillDownButtonDown);
 	}
+
+	SetSkillWidget(Data);
 }
 
 void UCSkillWidget::OnSkillUpButtonDown()
@@ -40,7 +42,7 @@ void UCSkillWidget::SetSkillWidget(class UCSkillData* SkillData)
 
 	CheckNull(Data);
 
-	//Icon->SetIcon(Data);
+	Icon->SetIcon(Data);
 	CurrentLevel->SetText(FText::FromString(FString::FromInt(Data->CurrentLevel)));
 	MaxLevel->SetText(FText::FromString(FString::FromInt(Data->MaxLevel)));
 }

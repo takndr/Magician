@@ -8,16 +8,22 @@ UCLASS()
 class MAGICIAN_API UCSkillIcon : public UUserWidget
 {
 	GENERATED_BODY()
+protected:
+	virtual void NativeConstruct() override;
+
 public:
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	UPROPERTY(BlueprintReadWrite)
 		class UCSkillData* Data;
 
 protected:
 	UFUNCTION(BlueprintCallable)
 		void RefreshWidget();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 		bool IsActiveSkill();
+
+private:
+	void SetDefaultSetting();
 
 public:
 	void SetIcon(class UCSkillData* SkillData);

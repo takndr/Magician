@@ -43,8 +43,44 @@ void UCSkillList::CreateSkillWidget(class UCSkillData* SkillData)
 	}
 }
 
+void UCSkillList::Attach()
+{
+	SetVisibility(ESlateVisibility::Visible);
+
+	FInputModeGameAndUI inputMode;
+	inputMode.SetWidgetToFocus(TakeWidget());
+	inputMode.SetHideCursorDuringCapture(true);
+
+	UWorld* world = GetWorld();
+	CheckNull(world);
+	APlayerController* controller = world->GetFirstPlayerController();
+	CheckNull(controller);
+
+	controller->bShowMouseCursor = true;
+	controller->SetInputMode(inputMode);
+}
+
+void UCSkillList::Detach()
+{
+	SetVisibility(ESlateVisibility::Collapsed);
+
+	FInputModeGameOnly inputMode;
+
+	UWorld* world = GetWorld();
+	CheckNull(world);
+	APlayerController* controller = world->GetFirstPlayerController();
+	CheckNull(controller);
+
+	controller->bShowMouseCursor = false;
+	controller->SetInputMode(inputMode);
+}
+
+bool UCSkillList::IsOpened()
+{
+	return GetVisibility() == ESlateVisibility::Visible;
+}
+
 void UCSkillList::OnCloseButtonDown()
 {
-	//CLog::Print("Close Button Down");
-	//CLog::Print(GetOwningPlayer()->GetName());
+	Detach();
 }

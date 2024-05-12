@@ -11,7 +11,7 @@ public class Magician : ModuleRules
 		PublicIncludePaths.Add(ModuleDirectory);
 
 		PublicDependencyModuleNames.AddRange(new string[] 
-		{ "Core", "CoreUObject", "Engine", "InputCore" }
+		{ "Core", "CoreUObject", "Engine", "InputCore", "SlateCore" }
 		);
 	}
 }

@@ -9,8 +9,7 @@ class MAGICIAN_API UCMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
 public:
-	void OpenSkillListWidget();
-	void CloseSkillListWidget();
+	void ControlSkillListWidget();
 	void SetSkillList(class UCSkillData* SkillData);
 
 private:

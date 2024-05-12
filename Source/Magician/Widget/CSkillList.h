@@ -15,6 +15,9 @@ protected:
 //=====================================================
 public:
 	void CreateSkillWidget(class UCSkillData* SkillData);
+	void Attach();
+	void Detach();
+	bool IsOpened();
 //=====================================================
 private:
 	UFUNCTION()

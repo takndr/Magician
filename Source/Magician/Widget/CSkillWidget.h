@@ -37,6 +37,7 @@ private:
 	UPROPERTY(meta = (BindWidget))
 		class UButton* SkillDownButton;
 
-private:
-	class UCSkillData* Data;
+protected:
+	UPROPERTY(EditAnywhere)
+		class UCSkillData* Data;
 };
