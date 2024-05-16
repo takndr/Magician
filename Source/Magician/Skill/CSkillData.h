@@ -75,5 +75,5 @@ public:
 		uint8 MaxLevel;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		class UDataAsset* PreviousSkill;
+		class UCSkillData* PreviousSkill;
 };

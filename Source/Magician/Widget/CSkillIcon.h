@@ -31,4 +31,11 @@ public:
 private:
 	UPROPERTY(meta = (BindWidget))
 		class UImage* Icon;
+
+protected:
+	UPROPERTY(BlueprintReadWrite)
+		class UCSkillDetail* SkillDetail;
+	
+	UPROPERTY(BlueprintReadWrite)
+		bool IsInHUD = false;
 };

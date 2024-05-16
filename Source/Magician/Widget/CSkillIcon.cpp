@@ -34,12 +34,11 @@ void UCSkillIcon::RefreshWidget()
 {
 	if (!!Data)
 	{
-		Data->SkillIcon;
-		Icon->SetBrushFromTexture(Data->SkillIcon);
+		SetIcon(Data);
 	}
 	else
 	{
-
+		SetDefaultSetting();
 	}
 }
 
