@@ -40,4 +40,8 @@ private:
 protected:
 	UPROPERTY(EditAnywhere)
 		class UCSkillData* Data;
+
+
+private:
+	class ACPlayer* OwningPlayer;
 };

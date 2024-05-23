@@ -18,6 +18,9 @@ public:
 	void Attach();
 	void Detach();
 	bool IsOpened();
+
+private:
+	void SettingSkillPoint();
 //=====================================================
 private:
 	UFUNCTION()
@@ -26,6 +29,9 @@ private:
 private:
 	UPROPERTY(meta = (BindWidget))
 		class UButton* CloseButton;
+
+	UPROPERTY(meta = (BindWidget))
+		class UTextBlock* SkillPoint;
 
 	//UPROPERTY(meta = (BindWidget))
 	//	class UUniformGridPanel* ActivePanel;
@@ -36,4 +42,5 @@ private:
 //=====================================================
 private:
 	TSubclassOf<class UCSkillWidget> SkillWidgetClass;
+	class ACharacter* OwningPlayer;
 };

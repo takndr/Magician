@@ -47,6 +47,9 @@ class MAGICIAN_API UCSkillData : public UDataAsset
 {
 	GENERATED_BODY()
 public:
+	void DoAction();
+
+public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		ESkillStatus SkillStatus;
 
@@ -76,4 +79,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		class UCSkillData* PreviousSkill;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float SkillCoolDown;
 };

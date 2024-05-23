@@ -11,9 +11,7 @@ class MAGICIAN_API UCSkillIcon : public UUserWidget
 protected:
 	virtual void NativeConstruct() override;
 
-public:
-	UPROPERTY(BlueprintReadWrite)
-		class UCSkillData* Data;
+
 
 protected:
 	UFUNCTION(BlueprintCallable)
@@ -27,15 +25,21 @@ private:
 
 public:
 	void SetIcon(class UCSkillData* SkillData);
+	void SetIsQuickSlotIcon(bool bSlot) { IsInQuickSlot = bSlot; }
 
-private:
-	UPROPERTY(meta = (BindWidget))
-		class UImage* Icon;
+
+public:
+	UPROPERTY(BlueprintReadWrite)
+		class UCSkillData* Data;
 
 protected:
 	UPROPERTY(BlueprintReadWrite)
 		class UCSkillDetail* SkillDetail;
 	
 	UPROPERTY(BlueprintReadWrite)
-		bool IsInHUD = false;
+		bool IsInQuickSlot = false;
+
+private:
+	UPROPERTY(meta = (BindWidget))
+		class UImage* Icon;
 };

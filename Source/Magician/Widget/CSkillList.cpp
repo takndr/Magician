@@ -7,6 +7,9 @@
 #include "Widget/CSkillWidget.h"
 #include "Skill/CSkillData.h"
 
+#include "Player/CPlayer.h"
+#include "Component/CSkillComponent.h"
+
 #include "Global.h"
 
 UCSkillList::UCSkillList(const FObjectInitializer& ObjectInitializer) : UUserWidget(ObjectInitializer)
@@ -22,6 +25,9 @@ void UCSkillList::NativeConstruct()
 	{
 		CloseButton->OnClicked.AddDynamic(this, &UCSkillList::OnCloseButtonDown);
 	}
+
+	OwningPlayer = Cast<ACharacter>(GetOwningPlayerPawn());
+	SettingSkillPoint();
 }
 
 void UCSkillList::CreateSkillWidget(class UCSkillData* SkillData)
@@ -83,4 +89,19 @@ bool UCSkillList::IsOpened()
 void UCSkillList::OnCloseButtonDown()
 {
 	Detach();
+}
+
+void UCSkillList::SettingSkillPoint()
+{
+	CheckNull(OwningPlayer);
+
+	UCSkillComponent* skillComp = CHelpers::GetComponent<UCSkillComponent>(OwningPlayer);
+	
+	CheckNull(skillComp);
+
+	uint8 skillPoint = skillComp->GetSkillPoints();
+
+	FString temp = SkillPoint->GetText().ToString();
+	temp += FString::FromInt(skillPoint);
+	SkillPoint->SetText(FText::FromString(temp));
 }

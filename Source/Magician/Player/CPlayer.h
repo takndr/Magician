@@ -4,6 +4,13 @@
 #include "GameFramework/Character.h"
 #include "CPlayer.generated.h"
 
+DECLARE_DYNAMIC_DELEGATE(FSkill1Signature);
+DECLARE_DYNAMIC_DELEGATE(FSkill2Signature);
+DECLARE_DYNAMIC_DELEGATE(FSkill3Signature);
+DECLARE_DYNAMIC_DELEGATE(FSkill4Signature);
+DECLARE_DYNAMIC_DELEGATE(FSkill5Signature);
+
+
 UCLASS()
 class MAGICIAN_API ACPlayer : public ACharacter
 {
@@ -35,6 +42,11 @@ private:
 	void Dodge();
 	void OnSkillList();
 
+	void OnSkill1();
+	void OnSkill2();
+	void OnSkill3();
+	void OnSkill4();
+	void OnSkill5();
 // ================================================================================================
 protected:
 	UPROPERTY(EditAnywhere)
@@ -65,6 +77,13 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCSkillComponent* SkillComp;
 // ================================================================================================
+public:
+	FSkill1Signature Skill1Signature;
+	FSkill2Signature Skill2Signature;
+	FSkill3Signature Skill3Signature;
+	FSkill4Signature Skill4Signature;
+	FSkill5Signature Skill5Signature;
+
 private:
 	TSubclassOf<class UCMainWidget> SkillHUDWidgetClass;
 	TSubclassOf<class UUserWidget> SkillListWidgetClass;

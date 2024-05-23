@@ -62,7 +62,6 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetAnimInstanceClass(animClass);
 
 	// Widget Setting
-	//CHelpers::GetClass(&SkillListWidgetClass, "/Game/Widget/WB_SkillList");
 	CHelpers::GetClass(&SkillHUDWidgetClass, "/Game/Widget/WB_HUD_Main");
 }
 
@@ -111,6 +110,12 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Attack", IE_Released, this, &ACPlayer::OffAttack);
 	PlayerInputComponent->BindAction("Dodge", IE_Pressed, this, &ACPlayer::Dodge);
 	PlayerInputComponent->BindAction("SkillList", IE_Pressed, this, &ACPlayer::OnSkillList);
+
+	PlayerInputComponent->BindAction("Skill1", IE_Pressed, this, &ACPlayer::OnSkill1);
+	PlayerInputComponent->BindAction("Skill2", IE_Pressed, this, &ACPlayer::OnSkill2);
+	PlayerInputComponent->BindAction("Skill3", IE_Pressed, this, &ACPlayer::OnSkill3);
+	PlayerInputComponent->BindAction("Skill4", IE_Pressed, this, &ACPlayer::OnSkill4);
+	PlayerInputComponent->BindAction("Skill5", IE_Pressed, this, &ACPlayer::OnSkill5);
 }
 
 void ACPlayer::OnMoveForward(float Axis)
@@ -177,34 +182,46 @@ void ACPlayer::Dodge()
 
 void ACPlayer::OnSkillList()
 {
-	//CheckNull(SkillListWidget);
-
-	//if (SkillListWidget->IsInViewport() == false)
-	//{
-	//	SkillListWidget->AddToViewport();
-	//	SkillListWidget->SetVisibility(ESlateVisibility::Visible);
-
-	//	FInputModeGameAndUI inputMode;
-	//	APlayerController* controller = Cast<APlayerController>(GetController());
-	//	CheckNull(controller);
-
-	//	controller->bShowMouseCursor = true;
-	//	controller->SetInputMode(inputMode);
-	//}
-	//else
-	//{
-	//	SkillListWidget->RemoveFromParent();
-	//	SkillListWidget->SetVisibility(ESlateVisibility::Collapsed);
-
-	//	FInputModeGameAndUI inputMode;
-	//	//FInputModeGameOnly inputMode;
-	//	APlayerController* controller = Cast<APlayerController>(GetController());
-	//	CheckNull(controller);
-
-	//	controller->bShowMouseCursor = true;
-	//	controller->SetInputMode(inputMode);
-	//}
-
 	CheckNull(SkillHUDWidget);
 	SkillHUDWidget->ControlSkillListWidget();
+}
+
+void ACPlayer::OnSkill1()
+{
+	if (Skill1Signature.IsBound())
+	{
+		Skill1Signature.Execute();
+	}
+}
+
+void ACPlayer::OnSkill2()
+{
+	if (Skill2Signature.IsBound())
+	{
+		Skill2Signature.Execute();
+	}
+}
+
+void ACPlayer::OnSkill3()
+{
+	if (Skill3Signature.IsBound())
+	{
+		Skill3Signature.Execute();
+	}
+}
+
+void ACPlayer::OnSkill4()
+{
+	if (Skill4Signature.IsBound())
+	{
+		Skill4Signature.Execute();
+	}
+}
+
+void ACPlayer::OnSkill5()
+{
+	if (Skill5Signature.IsBound())
+	{
+		Skill5Signature.Execute();
+	}
 }

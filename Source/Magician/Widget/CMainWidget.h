@@ -8,26 +8,48 @@ UCLASS()
 class MAGICIAN_API UCMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
+protected:
+	virtual void NativeConstruct() override;
+
 public:
 	void ControlSkillListWidget();
 	void SetSkillList(class UCSkillData* SkillData);
 
 private:
+	UFUNCTION()
+		void DoSkill1();
+
+	UFUNCTION()
+		void DoSkill2();
+
+	UFUNCTION()
+		void DoSkill3();
+
+	UFUNCTION()
+		void DoSkill4();
+
+	UFUNCTION()
+		void DoSkill5();
+
+private:
 	UPROPERTY(meta = (BindWidget))
-		class UUserWidget* Skill1;
+		class UCSkillQuickSlot* Skill1;
 
 	UPROPERTY(meta = (BindWidget))
-		class UUserWidget* Skill2;
+		class UCSkillQuickSlot* Skill2;
 
 	UPROPERTY(meta = (BindWidget))
-		class UUserWidget* Skill3;
+		class UCSkillQuickSlot* Skill3;
 
 	UPROPERTY(meta = (BindWidget))
-		class UUserWidget* Skill4;
+		class UCSkillQuickSlot* Skill4;
 
 	UPROPERTY(meta = (BindWidget))
-		class UUserWidget* Skill5;
+		class UCSkillQuickSlot* Skill5;
 
 	UPROPERTY(meta = (BindWidget))
 		class UCSkillList* SkillList;
+
+private:
+	class ACPlayer* OwningPlayer;
 };

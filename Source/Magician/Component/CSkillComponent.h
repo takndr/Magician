@@ -18,9 +18,11 @@ public:
 	void IncreaseSkillPoints(uint8 Point);
 	void DecreaseSkillPoints(uint8 Point);
 
+	uint8 GetSkillPoints() { return SkillPoints; }
 //===================================================================
 public:
-	uint8 SkillPoints;
+	UPROPERTY(EditDefaultsOnly)
+		uint8 SkillPoints;
 //===================================================================
 
 private:
