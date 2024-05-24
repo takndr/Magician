@@ -82,4 +82,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float SkillCoolDown;
+
+	// 스킬 사용시 스폰 될 액터
+
+private:
+	bool IsCoolDown;
 };

@@ -4,5 +4,5 @@
 
 void UCSkillData::DoAction()
 {
-	CLog::Print(SkillName);
+	//CLog::Print(SkillName);
 }

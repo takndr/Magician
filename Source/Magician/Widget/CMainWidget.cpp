@@ -38,59 +38,59 @@ void UCMainWidget::SetSkillList(class UCSkillData* SkillData)
 
 void UCMainWidget::DoSkill1()
 {
-	if (Skill1->GetSkillInfo() == nullptr)
+	if (Skill1->IsInSkillSlot())
 	{
 		CLog::Print("No Skill In Quick Slot1");
 	}
 	else
 	{
-		Skill1->GetSkillInfo()->DoAction();
+		Skill1->DoAction();
 	}
 }
 void UCMainWidget::DoSkill2()
 {
-	if (Skill2->GetSkillInfo() == nullptr)
+	if (Skill2->IsInSkillSlot())
 	{
 		CLog::Print("No Skill In Quick Slot2");
 	}
 	else
 	{
-		Skill2->GetSkillInfo()->DoAction();
+		Skill2->DoAction();
 	}
 }
 
 void UCMainWidget::DoSkill3()
 {
-	if (Skill3->GetSkillInfo() == nullptr)
+	if (Skill3->IsInSkillSlot())
 	{
 		CLog::Print("No Skill In Quick Slot3");
 	}
 	else
 	{
-		Skill3->GetSkillInfo()->DoAction();
+		Skill3->DoAction();
 	}
 }
 
 void UCMainWidget::DoSkill4()
 {
-	if (Skill4->GetSkillInfo() == nullptr)
+	if (Skill4->IsInSkillSlot())
 	{
 		CLog::Print("No Skill In Quick Slot4");
 	}
 	else
 	{
-		Skill4->GetSkillInfo()->DoAction();
+		Skill4->DoAction();
 	}
 }
 
 void UCMainWidget::DoSkill5()
 {
-	if (Skill5->GetSkillInfo() == nullptr)
+	if (Skill5->IsInSkillSlot())
 	{
 		CLog::Print("No Skill In Quick Slot5");
 	}
 	else
 	{
-		Skill5->GetSkillInfo()->DoAction();
+		Skill5->DoAction();
 	}
 }
