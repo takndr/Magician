@@ -16,6 +16,10 @@ public:
 	void SetSkillList(class UCSkillData* SkillData);
 
 private:
+	void SelectSkill(class UCSkillQuickSlot* SkillSlot);
+	void OffAllSkill();
+
+private:
 	UFUNCTION()
 		void DoSkill1();
 

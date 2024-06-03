@@ -16,13 +16,22 @@ protected:
 
 public:
 	bool IsInSkillSlot();
-	void DoAction();
+	class UCSkillData* GetInSkillSlot();
+
+	void OnSelected();
+	void OffSelected();
 
 protected:
 	UFUNCTION(BlueprintCallable)
 		void SetTickTimeline(float DeltaTime);
 
+	UFUNCTION(BlueprintCallable)
+		void BindCoolDown();
+
 private:
+	UFUNCTION()
+		void DoAction();
+
 	UFUNCTION()
 		void CoolDown(float Output);
 
@@ -33,15 +42,18 @@ protected:
 	UPROPERTY(EditAnywhere)
 		FText KeyText;
 
-private:
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 		class UCSkillIcon* Icon;
-
+	
+private:
 	UPROPERTY(meta = (BindWidget))
 		class UTextBlock* KeyName;
 
 	UPROPERTY(meta = (BindWidget))
 		class UImage* SkillCoolDown;
+
+	UPROPERTY(meta = (BindWidget))
+		class UImage* SkillSelected;
 
 private:
 	class UMaterialInstanceDynamic* CoolDownMaterial;

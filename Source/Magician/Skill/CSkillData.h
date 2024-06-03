@@ -16,6 +16,12 @@ enum class ESkillType : uint8
 	None, Active, Passive
 };
 
+UENUM(BlueprintType)
+enum class EDamageType : uint8
+{
+	None, Active, Passive
+};
+
 USTRUCT(BlueprintType)
 struct FTemplateStruct
 {
@@ -42,12 +48,22 @@ public:
 	//
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSkillCoolDownSignature);
+
 UCLASS()
 class MAGICIAN_API UCSkillData : public UDataAsset
 {
 	GENERATED_BODY()
 public:
+	void BeginPlay(class ACharacter* Owner);
 	void DoAction();
+	
+	void Casting();
+	void CastComplete();
+
+	
+	bool IsCoolDown() { return bCoolDown; }
+	void SetCoolDown(bool CoolDown) { bCoolDown = CoolDown; }
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -57,6 +73,9 @@ public:
 		ESkillType SkillType;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		EDamageType DamageType;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		FString SkillName;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -64,6 +83,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		UTexture2D* SkillIcon;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float SkillRange;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float SkillDamage;
@@ -78,13 +100,21 @@ public:
 		uint8 MaxLevel;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		class UCSkillData* PreviousSkill;
+		TArray<class UCSkillData*> RequiredSkills;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float SkillCoolDown;
 
-	// 스킬 사용시 스폰 될 액터
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		TSubclassOf<class ACSkillEffector> EffectActor;
+
+	// 테스트용
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		bool bCoolDown = false;
+
+public:
+	FSkillCoolDownSignature OnSkillCoolDown;
 
 private:
-	bool IsCoolDown;
+	class ACharacter* OwnerCharacter;
 };

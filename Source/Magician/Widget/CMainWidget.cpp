@@ -38,59 +38,57 @@ void UCMainWidget::SetSkillList(class UCSkillData* SkillData)
 
 void UCMainWidget::DoSkill1()
 {
-	if (Skill1->IsInSkillSlot())
-	{
-		CLog::Print("No Skill In Quick Slot1");
-	}
-	else
-	{
-		Skill1->DoAction();
-	}
+	SelectSkill(Skill1);
 }
 void UCMainWidget::DoSkill2()
 {
-	if (Skill2->IsInSkillSlot())
-	{
-		CLog::Print("No Skill In Quick Slot2");
-	}
-	else
-	{
-		Skill2->DoAction();
-	}
+	SelectSkill(Skill2);
 }
 
 void UCMainWidget::DoSkill3()
 {
-	if (Skill3->IsInSkillSlot())
-	{
-		CLog::Print("No Skill In Quick Slot3");
-	}
-	else
-	{
-		Skill3->DoAction();
-	}
+	SelectSkill(Skill3);
 }
 
 void UCMainWidget::DoSkill4()
 {
-	if (Skill4->IsInSkillSlot())
-	{
-		CLog::Print("No Skill In Quick Slot4");
-	}
-	else
-	{
-		Skill4->DoAction();
-	}
+	SelectSkill(Skill4);
 }
 
 void UCMainWidget::DoSkill5()
 {
-	if (Skill5->IsInSkillSlot())
+	SelectSkill(Skill5);
+}
+
+void UCMainWidget::SelectSkill(class UCSkillQuickSlot* SkillSlot)
+{
+	if (SkillSlot->IsInSkillSlot())
 	{
 		CLog::Print("No Skill In Quick Slot5");
 	}
 	else
 	{
-		Skill5->DoAction();
+		UCSkillData* skillData = SkillSlot->GetInSkillSlot();
+
+		if (skillData == OwningPlayer->GetCurrentSkill())
+		{
+			OffAllSkill();
+			OwningPlayer->SetCurrentSkill(nullptr);
+		}
+		else
+		{
+			OffAllSkill();
+			SkillSlot->OnSelected();
+			OwningPlayer->SetCurrentSkill(skillData);
+		}
 	}
+}
+
+void UCMainWidget::OffAllSkill()
+{
+	Skill1->OffSelected();
+	Skill2->OffSelected();
+	Skill3->OffSelected();
+	Skill4->OffSelected();
+	Skill5->OffSelected();
 }

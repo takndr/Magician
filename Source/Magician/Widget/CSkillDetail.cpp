@@ -40,10 +40,15 @@ void UCSkillDetail::SettingDetail(UCSkillData* SkillData)
 	temp += FString::FromInt(SkillData->MaxLevel);
 	SkillMLevel->SetText(FText::FromString(temp));
 
-	if (SkillData->PreviousSkill != nullptr)
+	if (SkillData->RequiredSkills.Num() != 0)
 	{
 		temp = PreSkillName->GetText().ToString();
-		temp += SkillData->PreviousSkill->SkillName;
+
+		for (auto required : SkillData->RequiredSkills)
+		{
+			temp += required->SkillName + " ";
+		}
+		
 		PreSkillName->SetText(FText::FromString(temp));
 	}
 	else

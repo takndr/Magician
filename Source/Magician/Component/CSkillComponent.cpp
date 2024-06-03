@@ -16,14 +16,14 @@ void UCSkillComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ACPlayer* player = Cast<ACPlayer>(GetOwner());
+	ACharacter* ownerCharacter = Cast<ACPlayer>(GetOwner());
 
 	// 플레이어의 skill list widget을 가져오고
 
 	// TArray<SkillData> Skills의 배열을 돌면서 skill list widget에 추가
 	for (auto skill : Skills)
 	{
-		//player->GetSkillHUDWidget()->SetSkillList(skill);
+		skill->BeginPlay(ownerCharacter);
 	}
 }
 

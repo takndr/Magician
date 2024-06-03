@@ -12,6 +12,8 @@
 UCSkillQuickSlot::UCSkillQuickSlot(const FObjectInitializer& ObjectInitializer) : UUserWidget(ObjectInitializer)
 {
 	CHelpers::GetAsset(&CoolDownCurve, "/Game/SkillData/SkillCoolDownCurve");
+
+	//Icon->Data->OnSkillCoolDown.AddDynamic(this, &UCSkillQuickSlot::DoAction);
 }
 
 void UCSkillQuickSlot::NativeConstruct()
@@ -30,18 +32,12 @@ void UCSkillQuickSlot::NativeConstruct()
 	Timeline.SetTimelineFinishedFunc(FinishTimeline);
 }
 
-bool UCSkillQuickSlot::IsInSkillSlot()
-{
-	return Icon->Data == nullptr;
-}
-
 void UCSkillQuickSlot::DoAction()
 {
-	Icon->Data->DoAction();
+	//CheckTrue(Icon->Data->IsCoolDown());
+	//Icon->Data->DoAction();
 
 	// 스킬 아이콘 약간 흐릿
-
-
 	CoolDownMaterial->SetScalarParameterValue("Percent", 1.0f);
 	SkillCoolDown->SetVisibility(ESlateVisibility::Visible);
 
@@ -49,20 +45,55 @@ void UCSkillQuickSlot::DoAction()
 	float time = Icon->Data->SkillCoolDown;
 	Timeline.SetPlayRate(1.0f / time);
 	Timeline.ReverseFromEnd();
+
+	// 스킬 쿨타임 도는 중이라고 설정
+	Icon->Data->SetCoolDown(true);
 }
 
+// CoolDown 타임라인 동안 호출되는 함수
 void UCSkillQuickSlot::CoolDown(float Output)
 {
 	CoolDownMaterial->SetScalarParameterValue("Percent", Output);
 }
 
+// CoolDown 타임라인이 끝났을 때 호출되는 함수
 void UCSkillQuickSlot::CoolDownComplete()
 {
-	CLog::Print("Cool Down End");
 	SkillCoolDown->SetVisibility(ESlateVisibility::Collapsed);
+	Icon->Data->SetCoolDown(false);
 }
 
 void UCSkillQuickSlot::SetTickTimeline(float DeltaTime)
 {
 	Timeline.TickTimeline(DeltaTime);
+}
+
+void UCSkillQuickSlot::BindCoolDown()
+{
+	if (Icon->Data->OnSkillCoolDown.IsBound())
+	{
+		Icon->Data->OnSkillCoolDown.Clear();
+	}
+	Icon->Data->OnSkillCoolDown.AddDynamic(this, &UCSkillQuickSlot::DoAction);
+	CLog::Print("1");
+}
+
+bool UCSkillQuickSlot::IsInSkillSlot()
+{ 
+	return Icon->Data == nullptr; 
+}
+
+class UCSkillData* UCSkillQuickSlot::GetInSkillSlot()
+{
+	return Icon->Data;
+}
+
+void UCSkillQuickSlot::OnSelected()
+{
+	SkillSelected->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UCSkillQuickSlot::OffSelected()
+{
+	SkillSelected->SetVisibility(ESlateVisibility::Hidden);
 }

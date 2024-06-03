@@ -11,6 +11,7 @@
 #include "Component/CSkillComponent.h"
 #include "Widget/CSkillList.h"
 #include "Widget/CMainWidget.h"
+#include "Skill/CSkillData.h"
 
 #include "Global.h"
 
@@ -36,7 +37,7 @@ ACPlayer::ACPlayer()
 	MeshSpringArm->bUsePawnControlRotation = true;
 
 	// MeshCamera Setting
-	MeshCamera->bUsePawnControlRotation = true;
+	//MeshCamera->bUsePawnControlRotation = true;
 
 	// Based Character Setting
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
@@ -120,7 +121,7 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ACPlayer::OnMoveForward(float Axis)
 {
-	FRotator rotator = FRotator(0, GetControlRotation().Yaw, 0);
+	FRotator rotator = FRotator(0, MeshSpringArm->GetRelativeRotation().Yaw, 0);
 	FVector direction = FQuat(rotator).GetForwardVector().GetSafeNormal2D();
 
 	AddMovementInput(direction, Axis);
@@ -128,7 +129,7 @@ void ACPlayer::OnMoveForward(float Axis)
 
 void ACPlayer::OnMoveRight(float Axis)
 {
-	FRotator rotator = FRotator(0, GetControlRotation().Yaw, 0);
+	FRotator rotator = FRotator(0, MeshSpringArm->GetRelativeRotation().Yaw, 0);
 	FVector direction = FQuat(rotator).GetRightVector().GetSafeNormal2D();
 
 	AddMovementInput(direction, Axis);
@@ -136,14 +137,22 @@ void ACPlayer::OnMoveRight(float Axis)
 
 void ACPlayer::OnHorizontalLook(float Axis)
 {
-	float speed = OptionComp->GetHorizontalSpeed();
-	AddControllerYawInput(Axis * GetWorld()->GetDeltaSeconds() * speed);
+	float speed = Axis * GetWorld()->GetDeltaSeconds() * OptionComp->GetHorizontalSpeed();
+
+	FRotator temp = MeshSpringArm->GetRelativeRotation();
+	FRotator modify = FRotator(temp.Pitch, temp.Yaw + speed, temp.Roll);
+
+	MeshSpringArm->SetRelativeRotation(modify);
 }
 
 void ACPlayer::OnVerticalLook(float Axis)
 {
-	float speed = OptionComp->GetVerticalSpeed();
-	AddControllerPitchInput(Axis * GetWorld()->GetDeltaSeconds() * speed * -1.f);
+	float speed = Axis * GetWorld()->GetDeltaSeconds() * OptionComp->GetVerticalSpeed();
+
+	FRotator temp = MeshSpringArm->GetRelativeRotation();
+	FRotator modify = FRotator(FMath::Clamp(temp.Pitch + speed, -20.0f, 0.0f), temp.Yaw, temp.Roll);
+
+	MeshSpringArm->SetRelativeRotation(modify);
 }
 
 void ACPlayer::OnZoom(float Axis)
@@ -163,7 +172,15 @@ void ACPlayer::OnJump()
 void ACPlayer::OnAttack()
 {
 	// 마우스 쭉 누르고 있을 때
-	CheckTrue(StateComp->IsIdle());
+	CheckFalse(StateComp->IsIdle());
+	//CheckNull(CurrentSkill);
+
+	if (CurrentSkill == nullptr)
+	{
+		CLog::Print("No Skill Selected");
+		return;
+	}
+
 
 	StateComp->SetAttack();
 }
@@ -171,13 +188,16 @@ void ACPlayer::OnAttack()
 void ACPlayer::OffAttack()
 {
 	// 마우스 뗏을 때
+	CheckNull(CurrentSkill);
+
+	CurrentSkill->DoAction();
 
 	StateComp->SetIdle();
 }
 
 void ACPlayer::Dodge()
 {
-	CheckTrue(StateComp->IsIdle());
+	CheckFalse(StateComp->IsIdle());
 }
 
 void ACPlayer::OnSkillList()
@@ -224,4 +244,9 @@ void ACPlayer::OnSkill5()
 	{
 		Skill5Signature.Execute();
 	}
+}
+
+void ACPlayer::SetCurrentSkill(class UCSkillData* SkillData)
+{
+	CurrentSkill = SkillData;
 }

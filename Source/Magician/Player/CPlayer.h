@@ -27,6 +27,8 @@ public:
 	// Getter & Setter
 	class UCMainWidget* GetSkillHUDWidget() { return SkillHUDWidget; }
 
+	void SetCurrentSkill(class UCSkillData* SkillData);
+	class UCSkillData* GetCurrentSkill() { return CurrentSkill; }
 private:
 	// Axis Event
 	void OnMoveForward(float Axis);
@@ -92,5 +94,5 @@ private:
 	class UUserWidget* SkillListWidget;
 
 	bool bOpenSkillList = false;
-	
+	class UCSkillData* CurrentSkill;
 };
