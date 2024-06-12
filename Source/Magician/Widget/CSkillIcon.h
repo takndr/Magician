@@ -11,6 +11,8 @@ class MAGICIAN_API UCSkillIcon : public UUserWidget
 protected:
 	virtual void NativeConstruct() override;
 
+public:
+
 protected:
 	UFUNCTION(BlueprintCallable)
 		void RefreshWidget();

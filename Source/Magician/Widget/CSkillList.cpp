@@ -2,7 +2,7 @@
 
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
-#include "Components/UniformGridPanel.h"
+#include "Components/ScrollBox.h"
 
 #include "Widget/CSkillWidget.h"
 #include "Skill/CSkillData.h"
@@ -27,25 +27,33 @@ void UCSkillList::NativeConstruct()
 	}
 
 	OwningPlayer = Cast<ACharacter>(GetOwningPlayerPawn());
-	SettingSkillPoint();
+	UpdateSkillPoint();
 }
 
 void UCSkillList::CreateSkillWidget(class UCSkillData* SkillData)
 {
 	// SkillWidgetClass으로 SkillWidget을 생성하고
 	UCSkillWidget* skillWidget = CreateWidget<UCSkillWidget>(GetWorld(), SkillWidgetClass);
-	skillWidget->SetSkillWidget(SkillData);
+	skillWidget->SetSkillWidget(SkillData, this);
+	SkillWidgets.AddUnique(skillWidget);
 
 	// Active인지 Passive인지 확인하여 맞는 패널에 Add
 	if (SkillData->SkillType == ESkillType::Active)
 	{
-		//ActivePanel->AddChild(skillWidget);
-
+		ActiveScroll->AddChild(skillWidget);
 	}
 
 	if (SkillData->SkillType == ESkillType::Passive)
 	{
-		//PassivePanel->AddChild(skillWidget);
+		PassiveScroll->AddChild(skillWidget);
+	}
+}
+
+void UCSkillList::RefreshSkillWidget()
+{
+	for (auto skillWidget : SkillWidgets)
+	{
+		skillWidget->RefreshWidget();
 	}
 }
 
@@ -91,7 +99,7 @@ void UCSkillList::OnCloseButtonDown()
 	Detach();
 }
 
-void UCSkillList::SettingSkillPoint()
+void UCSkillList::UpdateSkillPoint() 
 {
 	CheckNull(OwningPlayer);
 
@@ -99,9 +107,9 @@ void UCSkillList::SettingSkillPoint()
 	
 	CheckNull(skillComp);
 
-	uint8 skillPoint = skillComp->GetSkillPoints();
+	int skillPoint = skillComp->GetSkillPoints();
 
-	FString temp = SkillPoint->GetText().ToString();
+	FString temp = "남은 스킬 포인트 : ";
 	temp += FString::FromInt(skillPoint);
 	SkillPoint->SetText(FText::FromString(temp));
 }

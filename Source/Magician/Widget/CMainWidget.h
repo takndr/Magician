@@ -14,6 +14,7 @@ protected:
 public:
 	void ControlSkillListWidget();
 	void SetSkillList(class UCSkillData* SkillData);
+	class UCSkillList* GetSkillList();
 
 private:
 	void SelectSkill(class UCSkillQuickSlot* SkillSlot);

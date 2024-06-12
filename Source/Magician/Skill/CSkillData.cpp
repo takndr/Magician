@@ -22,7 +22,8 @@ void UCSkillData::DoAction()
 		OnSkillCoolDown.Broadcast();
 	}
 
-	OwnerCharacter->PlayAnimMontage(SkillMontage);
+
+	OwnerCharacter->PlayAnimMontage(SkillMontage, SkillMontage->SequenceLength / CastingTime);
 }
 
 void UCSkillData::Casting()
@@ -33,4 +34,58 @@ void UCSkillData::Casting()
 void UCSkillData::CastComplete()
 {
 
+}
+
+void UCSkillData::SpawnEffector()
+{
+	CLog::Print("Spawn");
+}
+
+void UCSkillData::Upgrade()
+{
+	if (SkillStatus == ESkillStatus::UnLocked)
+	{
+		SkillStatus = ESkillStatus::Acquired;
+	}
+
+	CurrentLevel = FMath::Clamp(CurrentLevel + 1, 0, MaxLevel);
+}
+
+void UCSkillData::Downgrade()
+{
+	CurrentLevel = FMath::Clamp(CurrentLevel - 1, 0, MaxLevel);
+
+	if (CurrentLevel == 0)
+	{
+		SkillStatus = ESkillStatus::UnLocked;
+	}
+}
+
+bool UCSkillData::CanLearnedSkill()
+{
+	return SkillStatus >= ESkillStatus::UnLocked;
+}
+
+void UCSkillData::RefreshSkill()
+{
+	// SkillStatus 관련 업데이트
+	if (RequiredSkills.Num() == 0)
+	{
+		return;
+	}
+
+	bool temp = true;
+	for (auto skill : RequiredSkills)
+	{
+		temp &= (skill->SkillStatus == ESkillStatus::Acquired);
+	}
+
+	if (temp)
+	{
+		SkillStatus = ESkillStatus::UnLocked;
+	}
+	else
+	{
+		SkillStatus = ESkillStatus::Locked;
+	}
 }

@@ -73,11 +73,6 @@ void ACPlayer::BeginPlay()
 		Staff->SetStaticMesh(MagicianWeapon);
 	}
 
-	if (!!SkillListWidgetClass)
-	{
-		SkillListWidget = CreateWidget<UUserWidget, APlayerController>(GetController<APlayerController>(), SkillListWidgetClass);
-	}
-
 	if (!!SkillHUDWidgetClass)
 	{
 		SkillHUDWidget = CreateWidget<UCMainWidget, APlayerController>(GetController<APlayerController>(), SkillHUDWidgetClass);
@@ -183,16 +178,13 @@ void ACPlayer::OnAttack()
 
 
 	StateComp->SetAttack();
+	CurrentSkill->DoAction();
 }
 
 void ACPlayer::OffAttack()
 {
 	// 마우스 뗏을 때
 	CheckNull(CurrentSkill);
-
-	CurrentSkill->DoAction();
-
-	StateComp->SetIdle();
 }
 
 void ACPlayer::Dodge()
@@ -208,6 +200,8 @@ void ACPlayer::OnSkillList()
 
 void ACPlayer::OnSkill1()
 {
+	CheckFalse(StateComp->IsIdle());
+
 	if (Skill1Signature.IsBound())
 	{
 		Skill1Signature.Execute();
@@ -216,6 +210,8 @@ void ACPlayer::OnSkill1()
 
 void ACPlayer::OnSkill2()
 {
+	CheckFalse(StateComp->IsIdle());
+
 	if (Skill2Signature.IsBound())
 	{
 		Skill2Signature.Execute();
@@ -224,6 +220,8 @@ void ACPlayer::OnSkill2()
 
 void ACPlayer::OnSkill3()
 {
+	CheckFalse(StateComp->IsIdle());
+
 	if (Skill3Signature.IsBound())
 	{
 		Skill3Signature.Execute();
@@ -232,6 +230,8 @@ void ACPlayer::OnSkill3()
 
 void ACPlayer::OnSkill4()
 {
+	CheckFalse(StateComp->IsIdle());
+
 	if (Skill4Signature.IsBound())
 	{
 		Skill4Signature.Execute();
@@ -240,6 +240,8 @@ void ACPlayer::OnSkill4()
 
 void ACPlayer::OnSkill5()
 {
+	CheckFalse(StateComp->IsIdle());
+
 	if (Skill5Signature.IsBound())
 	{
 		Skill5Signature.Execute();

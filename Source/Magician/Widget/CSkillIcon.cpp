@@ -9,8 +9,6 @@
 void UCSkillIcon::NativeConstruct()
 {
 	Super::NativeConstruct();
-
-	SetDefaultSetting();
 }
 
 void UCSkillIcon::SetIcon(UCSkillData* SkillData)

@@ -3,7 +3,10 @@
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
 
+#include "Component/CSkillComponent.h"
+
 #include "Widget/CSkillIcon.h"
+#include "Widget/CSkillList.h"
 #include "Skill/CSkillData.h"
 #include "Player/CPlayer.h"
 
@@ -23,41 +26,107 @@ void UCSkillWidget::NativeConstruct()
 		SkillDownButton->OnClicked.AddDynamic(this, &UCSkillWidget::OnSkillDownButtonDown);
 	}
 
-	SetSkillWidget(Data);
-
-	OwningPlayer = Cast<ACPlayer>(GetOwningPlayerPawn());
+	OwningPlayer = Cast<ACharacter>(GetOwningPlayerPawn());
+	SkillComp = CHelpers::GetComponent<UCSkillComponent>(OwningPlayer);
 }
 
 void UCSkillWidget::OnSkillUpButtonDown()
 {
-	CLog::Print("Skill Up Button Down");
+	CheckNull(SkillComp);
 
-	// SkillData에 있는 Current Level 증가
+	// SkillData를 Upgrade
+	SkillComp->UpgradeSkill(Data);
 
-	// Skill Component에 있는 Skill Point 감소
+	UpdateCurrentLevel();
+	RefreshWidget();
 
 	// Skill List 위젯 리프레쉬
+	if (!!SkillListWidget)
+	{
+		SkillListWidget->UpdateSkillPoint();
+	}
 }
 
 void UCSkillWidget::OnSkillDownButtonDown()
 {
-	CLog::Print("Skill Down Button Down");
+	CheckNull(SkillComp);
 
-	// SkillData에 있는 Current Level 감소
+	// SkillData를 Downgrade
+	SkillComp->DowngradeSkill(Data);
 
-	// Skill Component에 있는 Skill Point 증가
+	UpdateCurrentLevel();
+	RefreshWidget();
 
 	// Skill List 위젯 리프레쉬
+	if (!!SkillListWidget)
+	{
+		SkillListWidget->UpdateSkillPoint();
+	}
 }
 
-void UCSkillWidget::SetSkillWidget(class UCSkillData* SkillData)
+void UCSkillWidget::SetSkillWidget(class UCSkillData* SkillData, class UCSkillList* ListWidget)
 {
 	CheckNull(SkillData);
 	Data = SkillData;
 
-	CheckNull(Data);
-
 	Icon->SetIcon(Data);
+
+	if (Data->SkillType == ESkillType::Active)
+	{
+		SkillType->SetText(FText::FromString("Active"));
+	}
+
+	if (Data->SkillType == ESkillType::Passive)
+	{
+		SkillType->SetText(FText::FromString("Passive"));
+	}
+
+	SkillName->SetText(FText::FromString(Data->SkillName));
+
+	UpdateCurrentLevel();
+	UpdateMaxLevel();
+	RefreshWidget();
+
+	SkillListWidget = ListWidget;
+}
+
+void UCSkillWidget::RefreshWidget()
+{
+	if (Data->CanLearnedSkill())
+	{
+		SetColorAndOpacity(FLinearColor(1, 1, 1, 1));
+	}
+	else
+	{
+		SetColorAndOpacity(FLinearColor(0.5, 0.5, 0.5, 0.5));
+		SkillUpButton->SetVisibility(ESlateVisibility::Hidden);
+		SkillDownButton->SetVisibility(ESlateVisibility::Hidden);
+		return;
+	}
+
+	if (Data->CurrentLevel == Data->MaxLevel)
+	{
+		SkillUpButton->SetVisibility(ESlateVisibility::Hidden);
+		SkillDownButton->SetVisibility(ESlateVisibility::Visible);
+	}
+	else if (Data->CurrentLevel == 0)
+	{
+		SkillUpButton->SetVisibility(ESlateVisibility::Visible);
+		SkillDownButton->SetVisibility(ESlateVisibility::Hidden);
+	}
+	else
+	{
+		SkillUpButton->SetVisibility(ESlateVisibility::Visible);
+		SkillDownButton->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void UCSkillWidget::UpdateCurrentLevel()
+{
 	CurrentLevel->SetText(FText::FromString(FString::FromInt(Data->CurrentLevel)));
+}
+
+void UCSkillWidget::UpdateMaxLevel()
+{
 	MaxLevel->SetText(FText::FromString(FString::FromInt(Data->MaxLevel)));
 }

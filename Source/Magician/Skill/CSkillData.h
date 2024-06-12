@@ -22,33 +22,9 @@ enum class EDamageType : uint8
 	None, Active, Passive
 };
 
-USTRUCT(BlueprintType)
-struct FTemplateStruct
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		FString SkillName;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		FString SkillDetails;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UTexture2D* SkillIcon;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float SkillDamage;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UAnimMontage* SkillMontage;
-
-	// 소환할 스킬 이펙트
-	//UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	
-	//
-};
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSkillCoolDownSignature);
+
+// TODO
 
 UCLASS()
 class MAGICIAN_API UCSkillData : public UDataAsset
@@ -60,10 +36,18 @@ public:
 	
 	void Casting();
 	void CastComplete();
+	void SpawnEffector();
 
 	
 	bool IsCoolDown() { return bCoolDown; }
 	void SetCoolDown(bool CoolDown) { bCoolDown = CoolDown; }
+
+	void Upgrade();
+	void Downgrade();
+
+	bool CanLearnedSkill();
+
+	void RefreshSkill();
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -94,10 +78,10 @@ public:
 		UAnimMontage* SkillMontage;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		uint8 CurrentLevel;
+		int CurrentLevel;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		uint8 MaxLevel;
+		int MaxLevel;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TArray<class UCSkillData*> RequiredSkills;
@@ -107,6 +91,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		TSubclassOf<class ACSkillEffector> EffectActor;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float CastingTime = 1.0f;
 
 	// 테스트용
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

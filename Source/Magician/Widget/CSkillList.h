@@ -15,12 +15,14 @@ protected:
 //=====================================================
 public:
 	void CreateSkillWidget(class UCSkillData* SkillData);
+	void RefreshSkillWidget();
+
 	void Attach();
 	void Detach();
 	bool IsOpened();
+	void UpdateSkillPoint();
 
 private:
-	void SettingSkillPoint();
 //=====================================================
 private:
 	UFUNCTION()
@@ -33,14 +35,15 @@ private:
 	UPROPERTY(meta = (BindWidget))
 		class UTextBlock* SkillPoint;
 
-	//UPROPERTY(meta = (BindWidget))
-	//	class UUniformGridPanel* ActivePanel;
+	UPROPERTY(meta = (BindWidget))
+		class UScrollBox* ActiveScroll;
 
-	//UPROPERTY(meta = (BindWidget))
-	//	class UUniformGridPanel* PassivePanel;
+	UPROPERTY(meta = (BindWidget))
+		class UScrollBox* PassiveScroll;
 
 //=====================================================
 private:
 	TSubclassOf<class UCSkillWidget> SkillWidgetClass;
+	TArray<class UCSkillWidget*> SkillWidgets;
 	class ACharacter* OwningPlayer;
 };

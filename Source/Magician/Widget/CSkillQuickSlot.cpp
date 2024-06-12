@@ -12,8 +12,6 @@
 UCSkillQuickSlot::UCSkillQuickSlot(const FObjectInitializer& ObjectInitializer) : UUserWidget(ObjectInitializer)
 {
 	CHelpers::GetAsset(&CoolDownCurve, "/Game/SkillData/SkillCoolDownCurve");
-
-	//Icon->Data->OnSkillCoolDown.AddDynamic(this, &UCSkillQuickSlot::DoAction);
 }
 
 void UCSkillQuickSlot::NativeConstruct()
@@ -34,9 +32,6 @@ void UCSkillQuickSlot::NativeConstruct()
 
 void UCSkillQuickSlot::DoAction()
 {
-	//CheckTrue(Icon->Data->IsCoolDown());
-	//Icon->Data->DoAction();
-
 	// ½ºÅ³ ¾ÆÀÌÄÜ ¾à°£ Èå¸´
 	CoolDownMaterial->SetScalarParameterValue("Percent", 1.0f);
 	SkillCoolDown->SetVisibility(ESlateVisibility::Visible);
@@ -75,7 +70,6 @@ void UCSkillQuickSlot::BindCoolDown()
 		Icon->Data->OnSkillCoolDown.Clear();
 	}
 	Icon->Data->OnSkillCoolDown.AddDynamic(this, &UCSkillQuickSlot::DoAction);
-	CLog::Print("1");
 }
 
 bool UCSkillQuickSlot::IsInSkillSlot()
@@ -96,4 +90,9 @@ void UCSkillQuickSlot::OnSelected()
 void UCSkillQuickSlot::OffSelected()
 {
 	SkillSelected->SetVisibility(ESlateVisibility::Hidden);
+}
+
+bool UCSkillQuickSlot::IsSelected()
+{
+	return SkillSelected->GetVisibility() == ESlateVisibility::Visible;
 }

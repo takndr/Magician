@@ -36,6 +36,11 @@ void UCMainWidget::SetSkillList(class UCSkillData* SkillData)
 	SkillList->CreateSkillWidget(SkillData);
 }
 
+UCSkillList* UCMainWidget::GetSkillList()
+{
+	return SkillList;
+}
+
 void UCMainWidget::DoSkill1()
 {
 	SelectSkill(Skill1);
@@ -64,7 +69,7 @@ void UCMainWidget::SelectSkill(class UCSkillQuickSlot* SkillSlot)
 {
 	if (SkillSlot->IsInSkillSlot())
 	{
-		CLog::Print("No Skill In Quick Slot5");
+		CLog::Print("No Skill In Quick Slot");
 	}
 	else
 	{

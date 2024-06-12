@@ -15,14 +15,17 @@ protected:
 	virtual void BeginPlay() override;
 //===================================================================
 public:
-	void IncreaseSkillPoints(uint8 Point);
-	void DecreaseSkillPoints(uint8 Point);
+	void UpgradeSkill(class UCSkillData* Skill);
+	void DowngradeSkill(class UCSkillData* Skill);
 
-	uint8 GetSkillPoints() { return SkillPoints; }
+	void IncreaseSkillPoints(int Point);
+	void DecreaseSkillPoints(int Point);
+
+	int GetSkillPoints() { return SkillPoints; }
 //===================================================================
 public:
 	UPROPERTY(EditDefaultsOnly)
-		uint8 SkillPoints;
+		int SkillPoints;
 //===================================================================
 
 private:
@@ -31,4 +34,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 		TArray<class AActor*> SkillsTest;
+
+//===================================================================
+
 };
+
+

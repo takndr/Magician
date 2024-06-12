@@ -88,10 +88,8 @@ public:
 
 private:
 	TSubclassOf<class UCMainWidget> SkillHUDWidgetClass;
-	TSubclassOf<class UUserWidget> SkillListWidgetClass;
 
 	class UCMainWidget* SkillHUDWidget;
-	class UUserWidget* SkillListWidget;
 
 	bool bOpenSkillList = false;
 	class UCSkillData* CurrentSkill;

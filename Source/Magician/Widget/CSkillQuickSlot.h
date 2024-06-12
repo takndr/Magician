@@ -28,6 +28,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 		void BindCoolDown();
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+		bool IsSelected();
+
 private:
 	UFUNCTION()
 		void DoAction();
