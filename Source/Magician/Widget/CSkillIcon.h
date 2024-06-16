@@ -25,7 +25,6 @@ private:
 
 public:
 	void SetIcon(class UCSkillData* SkillData);
-	void SetIsQuickSlotIcon(bool bSlot) { IsInQuickSlot = bSlot; }
 
 public:
 	UPROPERTY(BlueprintReadWrite)

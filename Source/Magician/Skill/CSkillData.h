@@ -90,7 +90,7 @@ public:
 		float SkillCoolDown;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		TSubclassOf<class ACSkillEffector> EffectActor;
+		TSubclassOf<class ACSkillEffector> EffectActorClass;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float CastingTime = 1.0f;

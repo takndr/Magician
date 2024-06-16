@@ -47,7 +47,7 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 		class UCSkillIcon* Icon;
-	
+
 private:
 	UPROPERTY(meta = (BindWidget))
 		class UTextBlock* KeyName;

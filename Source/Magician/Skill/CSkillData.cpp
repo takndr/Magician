@@ -2,6 +2,8 @@
 
 #include "GameFramework/Character.h"
 
+#include "Skill/CSkillEffector.h"
+
 #include "Global.h"
 
 void UCSkillData::BeginPlay(ACharacter* Owner)
@@ -38,7 +40,19 @@ void UCSkillData::CastComplete()
 
 void UCSkillData::SpawnEffector()
 {
-	CLog::Print("Spawn");
+	CheckNull(EffectActorClass);
+	
+	// Owner는 OwnerCharacter, 위치는 일단 Character위치
+	FTransform transform = OwnerCharacter->GetActorTransform();
+	FVector loc = transform.GetLocation() + OwnerCharacter->GetActorForwardVector() * 50;
+	//loc = FVector(loc.X, loc.Y, loc.Z - 88);
+	transform.SetLocation(loc);
+	CLog::Print("Spawn1");
+
+	FActorSpawnParameters spawnParameter;
+	spawnParameter.Owner = OwnerCharacter;
+
+	OwnerCharacter->GetWorld()->SpawnActor<ACSkillEffector>(EffectActorClass, transform, spawnParameter);
 }
 
 void UCSkillData::Upgrade()

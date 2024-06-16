@@ -19,7 +19,6 @@ void UCSkillQuickSlot::NativeConstruct()
 	Super::NativeConstruct();
 
 	KeyName->SetText(KeyText);
-	Icon->SetIsQuickSlotIcon(true);
 
 	CoolDownMaterial = SkillCoolDown->GetDynamicMaterial();
 
@@ -65,7 +64,7 @@ void UCSkillQuickSlot::SetTickTimeline(float DeltaTime)
 
 void UCSkillQuickSlot::BindCoolDown()
 {
-	if (Icon->Data->OnSkillCoolDown.IsBound())
+	if (!!Icon && Icon->Data->OnSkillCoolDown.IsBound())
 	{
 		Icon->Data->OnSkillCoolDown.Clear();
 	}
