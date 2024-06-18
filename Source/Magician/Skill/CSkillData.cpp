@@ -42,17 +42,11 @@ void UCSkillData::SpawnEffector()
 {
 	CheckNull(EffectActorClass);
 	
-	// Owner는 OwnerCharacter, 위치는 일단 Character위치
-	FTransform transform = OwnerCharacter->GetActorTransform();
-	FVector loc = transform.GetLocation() + OwnerCharacter->GetActorForwardVector() * 50;
-	//loc = FVector(loc.X, loc.Y, loc.Z - 88);
-	transform.SetLocation(loc);
-	CLog::Print("Spawn1");
-
+	FTransform transform;
 	FActorSpawnParameters spawnParameter;
 	spawnParameter.Owner = OwnerCharacter;
 
-	OwnerCharacter->GetWorld()->SpawnActor<ACSkillEffector>(EffectActorClass, transform, spawnParameter);
+	OwnerCharacter->GetWorld()->SpawnActor<ACSkillEffector>(EffectActorClass, transform, spawnParameter)->SetDamage(SkillDamage);
 }
 
 void UCSkillData::Upgrade()
@@ -84,6 +78,11 @@ void UCSkillData::RefreshSkill()
 {
 	// SkillStatus 관련 업데이트
 	if (RequiredSkills.Num() == 0)
+	{
+		return;
+	}
+
+	if (CurrentLevel != 0)
 	{
 		return;
 	}

@@ -176,6 +176,11 @@ void ACPlayer::OnAttack()
 		return;
 	}
 
+	if (CurrentSkill->IsCoolDown())
+	{
+		CLog::Print("Skill Cool Down Now. Wait");
+		return;
+	}
 
 	StateComp->SetAttack();
 	CurrentSkill->DoAction();

@@ -69,12 +69,6 @@ public:
 		UTexture2D* SkillIcon;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float SkillRange;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		float SkillDamage;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		UAnimMontage* SkillMontage;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -89,8 +83,14 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float SkillCoolDown;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
 		TSubclassOf<class ACSkillEffector> EffectActorClass;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
+		float SkillRange;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
+		float SkillDamage;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float CastingTime = 1.0f;

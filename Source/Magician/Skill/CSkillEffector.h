@@ -14,5 +14,14 @@ protected:
 	virtual void BeginPlay() override;
 public:	
 	virtual void Tick(float DeltaTime) override;
+// ========================================================
+public:
+	void SetDamage(float Damage) { SkillDamage = Damage; }
+// ========================================================
+protected:
+	UPROPERTY(BlueprintReadOnly)
+		float SkillDamage;
 
+	UPROPERTY(BlueprintReadWrite)
+		TArray<class AActor*> HittedActor;
 };
