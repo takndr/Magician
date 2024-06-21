@@ -16,11 +16,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 // ========================================================
 public:
-	void SetDamage(float Damage) { SkillDamage = Damage; }
+	void SetData(class UCSkillData* Data) { SkillData = Data; }
 // ========================================================
 protected:
-	UPROPERTY(BlueprintReadOnly)
-		float SkillDamage;
+	UPROPERTY(BlueprintReadOnly, meta = (ExposeOnSpawn = true))
+		class UCSkillData* SkillData;
 
 	UPROPERTY(BlueprintReadWrite)
 		TArray<class AActor*> HittedActor;

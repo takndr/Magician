@@ -41,12 +41,12 @@ void UCSkillData::CastComplete()
 void UCSkillData::SpawnEffector()
 {
 	CheckNull(EffectActorClass);
-	
-	FTransform transform;
-	FActorSpawnParameters spawnParameter;
-	spawnParameter.Owner = OwnerCharacter;
 
-	OwnerCharacter->GetWorld()->SpawnActor<ACSkillEffector>(EffectActorClass, transform, spawnParameter)->SetDamage(SkillDamage);
+	FTransform transform;
+	ACSkillEffector* effector;
+	effector = OwnerCharacter->GetWorld()->SpawnActorDeferred<ACSkillEffector>(EffectActorClass, transform, OwnerCharacter);
+	effector->SetData(this);
+	effector->FinishSpawning(transform);
 }
 
 void UCSkillData::Upgrade()

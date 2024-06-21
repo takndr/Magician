@@ -50,7 +50,7 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetGenerateOverlapEvents(true);
 
 	class USkeletalMesh* playerMesh;
-	CHelpers::GetAsset(&playerMesh, "SkeletalMesh'/Game/BattleWizardPolyart/Meshes/WizardSM.WizardSM'");
+	CHelpers::GetAsset(&playerMesh, "/Game/Asset/BattleWizardPolyart/Meshes/WizardSM");
 	GetMesh()->SetSkeletalMesh(playerMesh);
 
 	// Weapon Setting

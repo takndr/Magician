@@ -1,5 +1,7 @@
 #include "Skill/CSkillEffector.h"
 
+#include "Global.h"
+
 ACSkillEffector::ACSkillEffector()
 {
 	PrimaryActorTick.bCanEverTick = true;
