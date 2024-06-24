@@ -57,6 +57,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 		class UAnimMontage* TestAttackMontage;
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class UCDamageComponent* DamageComp;
+
 private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class USpringArmComponent* MeshSpringArm;
@@ -78,6 +81,8 @@ private:
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCSkillComponent* SkillComp;
+
+
 // ================================================================================================
 public:
 	FSkill1Signature Skill1Signature;

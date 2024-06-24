@@ -9,6 +9,8 @@
 #include "Component/CStateComponent.h"
 #include "Component/CStatusComponent.h"
 #include "Component/CSkillComponent.h"
+#include "Component/CDamageComponent.h"
+
 #include "Widget/CSkillList.h"
 #include "Widget/CMainWidget.h"
 #include "Skill/CSkillData.h"
@@ -29,6 +31,7 @@ ACPlayer::ACPlayer()
 	CHelpers::CreateActorComponent(this, &StateComp, "State");
 	CHelpers::CreateActorComponent(this, &StatusComp, "Status");
 	CHelpers::CreateActorComponent(this, &SkillComp, "Skill");
+	CHelpers::CreateActorComponent(this, &DamageComp, "Damage");
 
 	// MeshSpringArm Setting
 	MeshSpringArm->SetRelativeLocation(FVector(0, 0, 60));

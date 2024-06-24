@@ -2,7 +2,7 @@
 
 #include "GameFramework/Character.h"
 
-#include "Skill/CSkillEffector.h"
+#include "Skill/CSkillActor.h"
 
 #include "Global.h"
 
@@ -40,13 +40,13 @@ void UCSkillData::CastComplete()
 
 void UCSkillData::SpawnEffector()
 {
-	CheckNull(EffectActorClass);
+	CheckNull(SkillActorClass);
 
 	FTransform transform;
-	ACSkillEffector* effector;
-	effector = OwnerCharacter->GetWorld()->SpawnActorDeferred<ACSkillEffector>(EffectActorClass, transform, OwnerCharacter);
-	effector->SetData(this);
-	effector->FinishSpawning(transform);
+	ACSkillActor* skillActor;
+	skillActor = OwnerCharacter->GetWorld()->SpawnActorDeferred<ACSkillActor>(SkillActorClass, transform, OwnerCharacter);
+	skillActor->SetData(this);
+	skillActor->FinishSpawning(transform);
 }
 
 void UCSkillData::Upgrade()

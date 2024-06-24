@@ -2,6 +2,7 @@
 
 #include "Component/CStatusComponent.h"
 #include "Component/CStateComponent.h"
+#include "Component/CDamageComponent.h"
 
 #include "Enemy/CAIController.h"
 
@@ -13,6 +14,7 @@ ACEnemy::ACEnemy()
 
 	CHelpers::CreateActorComponent(this, &StatusComp, "Status");
 	CHelpers::CreateActorComponent(this, &StateComp, "State");
+	CHelpers::CreateActorComponent(this, &DamageComp, "Damage");
 
 	// SkeletalMesh Setting
 	GetMesh()->SetRelativeLocation(FVector(0, 0, -88));

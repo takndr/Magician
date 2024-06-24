@@ -35,7 +35,7 @@ protected:
 private:
 	TArray<class ACharacter*> HittedCharacters;
 // =================================================================
-protected:
+private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStatusComponent* StatusComp;
 
@@ -43,6 +43,9 @@ protected:
 		class UCStateComponent* StateComp;
 
 protected:
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class UCDamageComponent* DamageComp;
+
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		class UBehaviorTree* BehaviorTree;
 

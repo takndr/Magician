@@ -84,7 +84,10 @@ public:
 		float SkillCoolDown;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
-		TSubclassOf<class ACSkillEffector> EffectActorClass;
+		TSubclassOf<class ACSkillActor> SkillActorClass;
+
+	//UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
+	//	TSubclassOf<class ACSkillEffector> SkillEffectorClass;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
 		float SkillRange;

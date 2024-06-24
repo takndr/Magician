@@ -14,14 +14,5 @@ protected:
 	virtual void BeginPlay() override;
 public:	
 	virtual void Tick(float DeltaTime) override;
-// ========================================================
-public:
-	void SetData(class UCSkillData* Data) { SkillData = Data; }
-// ========================================================
-protected:
-	UPROPERTY(BlueprintReadOnly, meta = (ExposeOnSpawn = true))
-		class UCSkillData* SkillData;
 
-	UPROPERTY(BlueprintReadWrite)
-		TArray<class AActor*> HittedActor;
 };
