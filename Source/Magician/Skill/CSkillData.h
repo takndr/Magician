@@ -95,6 +95,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
 		float SkillDamage;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
+		float SkillMana;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 		float CastingTime = 1.0f;
 

@@ -27,9 +27,6 @@ void UCSkillComponent::BeginPlay()
 	{
 		skill->BeginPlay(ownerCharacter);
 		mainWidget->SetSkillList(skill);
-
-		// Skill위젯 생성했으면 SkillWidgets에 각각 저장
-
 	}
 }
 

@@ -36,6 +36,15 @@ private:
 	UFUNCTION()
 		void DoSkill5();
 
+	UFUNCTION()
+		void UpdateHpBar(float ratio);
+	
+	UFUNCTION()
+		void UpdateMpBar(float ratio);
+		
+	UFUNCTION()
+		void UpdateXpBar(float ratio);
+
 private:
 	UPROPERTY(meta = (BindWidget))
 		class UCSkillQuickSlot* Skill1;
@@ -54,6 +63,15 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 		class UCSkillList* SkillList;
+
+	UPROPERTY(meta = (BindWidget))
+		class UProgressBar* Hp_bar;
+
+	UPROPERTY(meta = (BindWidget))
+		class UProgressBar* Mp_bar;
+
+	UPROPERTY(meta = (BindWidget))
+		class UProgressBar* Xp_bar;
 
 private:
 	class ACPlayer* OwningPlayer;

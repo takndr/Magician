@@ -26,10 +26,22 @@ void UCStatusComponent::IncreaseHealth(float Dx)
 {
 	CurrentHp += Dx;
 	CurrentHp = FMath::Clamp(CurrentHp, 0.0f, MaxHp);
+
+	if (OnHpChanged.IsBound())
+	{
+		float ratio = CurrentHp / MaxHp;
+		OnHpChanged.Execute(ratio);
+	}
 }
 
 void UCStatusComponent::DecreaseHealth(float Dx)
 {
 	CurrentHp -= Dx;
 	CurrentHp = FMath::Clamp(CurrentHp, 0.0f, MaxHp);
+
+	if (OnHpChanged.IsBound())
+	{
+		float ratio = CurrentHp / MaxHp;
+		OnHpChanged.Execute(ratio);
+	}
 }

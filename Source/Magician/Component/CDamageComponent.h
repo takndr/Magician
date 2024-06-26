@@ -18,8 +18,6 @@ public:
 	UCDamageComponent();
 protected:
 	virtual void BeginPlay() override;
-public:	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 // ========================================================
 protected:
 	UFUNCTION(BlueprintCallable)
@@ -32,4 +30,7 @@ private:
 // ========================================================
 private:
 	TMap<EStatusEffect, TSubclassOf<class ACSkillEffector>> Effector;
+	class ACharacter* OwnerCharacter;
+
+
 };

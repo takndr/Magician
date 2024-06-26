@@ -1,8 +1,10 @@
 #include "Widget/CMainWidget.h"
 
 #include "Skill/CSkillData.h"
+#include "Component/CPlayerStatusComponent.h"
 #include "Widget/CSkillList.h"
 #include "Widget/CSkillQuickSlot.h"
+#include "Widget/CStatBar.h"
 
 #include "Player/CPlayer.h"
 
@@ -17,6 +19,10 @@ void UCMainWidget::NativeConstruct()
 	OwningPlayer->Skill3Signature.BindUFunction(this, "DoSkill3");
 	OwningPlayer->Skill4Signature.BindUFunction(this, "DoSkill4");
 	OwningPlayer->Skill5Signature.BindUFunction(this, "DoSkill5");
+
+	UCPlayerStatusComponent* statComp = CHelpers::GetComponent<UCPlayerStatusComponent>(OwningPlayer);
+	statComp->OnHpChanged.BindUFunction(this, "UpdateHpBar");
+	statComp->OnMpChanged.BindUFunction(this, "UpdateMpBar");
 }
 
 void UCMainWidget::ControlSkillListWidget()
@@ -45,6 +51,7 @@ void UCMainWidget::DoSkill1()
 {
 	SelectSkill(Skill1);
 }
+
 void UCMainWidget::DoSkill2()
 {
 	SelectSkill(Skill2);
@@ -96,4 +103,19 @@ void UCMainWidget::OffAllSkill()
 	Skill3->OffSelected();
 	Skill4->OffSelected();
 	Skill5->OffSelected();
+}
+
+void UCMainWidget::UpdateHpBar(float ratio)
+{
+
+}
+
+void UCMainWidget::UpdateMpBar(float ratio)
+{
+
+}
+
+void UCMainWidget::UpdateXpBar(float ratio)
+{
+
 }

@@ -7,7 +7,7 @@
 
 #include "Component/COptionComponent.h"
 #include "Component/CStateComponent.h"
-#include "Component/CStatusComponent.h"
+#include "Component/CPlayerStatusComponent.h"
 #include "Component/CSkillComponent.h"
 #include "Component/CDamageComponent.h"
 
@@ -57,7 +57,6 @@ ACPlayer::ACPlayer()
 	GetMesh()->SetSkeletalMesh(playerMesh);
 
 	// Weapon Setting
-	//Staff->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, "WeaponSocket");
 	Staff->AttachTo(GetMesh(), "WeaponSocket");
 
 	// Anim Setting

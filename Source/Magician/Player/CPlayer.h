@@ -77,7 +77,7 @@ private:
 		class UCStateComponent* StateComp;
 
 	UPROPERTY(VisibleDefaultsOnly)
-		class UCStatusComponent* StatusComp;
+		class UCPlayerStatusComponent* StatusComp;
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCSkillComponent* SkillComp;
