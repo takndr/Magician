@@ -10,7 +10,7 @@ class MAGICIAN_API UCStatBar : public UUserWidget
 	GENERATED_BODY()
 // ========================================================
 public:
-	void UpdateBar(float Percent);
+	void UpdateBar(float Percent, float Max, float Current);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere)
@@ -21,6 +21,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		class UImage* StatRemoveBar;
+
+	UPROPERTY(meta = (BindWidget))
+		class UTextBlock* StatText;
 
 	UPROPERTY(BlueprintReadWrite)
 		class UMaterialInstanceDynamic* StatRemoveMaterial;

@@ -6,7 +6,11 @@
 
 #include "Global.h"
 
-void UCStatBar::UpdateBar(float Percent)
+void UCStatBar::UpdateBar(float Percent, float Max, float Current)
 {
 	StatBar->SetPercent(Percent);
+
+	// Current / Max ·Î Text Á¤ÀÇ
+	//FText::For
+	//FText::Format()
 }

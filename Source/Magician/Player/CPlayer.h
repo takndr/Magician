@@ -60,6 +60,9 @@ protected:
 	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
 		class UCDamageComponent* DamageComp;
 
+	UPROPERTY(BlueprintReadOnly, VisibleDefaultsOnly)
+		class UCPlayerStatusComponent* StatusComp;
+
 private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class USpringArmComponent* MeshSpringArm;
@@ -76,8 +79,7 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStateComponent* StateComp;
 
-	UPROPERTY(VisibleDefaultsOnly)
-		class UCPlayerStatusComponent* StatusComp;
+	
 
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCSkillComponent* SkillComp;

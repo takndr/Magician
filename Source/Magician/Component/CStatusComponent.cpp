@@ -30,7 +30,7 @@ void UCStatusComponent::IncreaseHealth(float Dx)
 	if (OnHpChanged.IsBound())
 	{
 		float ratio = CurrentHp / MaxHp;
-		OnHpChanged.Execute(ratio);
+		OnHpChanged.Execute(ratio, MaxHp, CurrentHp);
 	}
 }
 
@@ -42,6 +42,6 @@ void UCStatusComponent::DecreaseHealth(float Dx)
 	if (OnHpChanged.IsBound())
 	{
 		float ratio = CurrentHp / MaxHp;
-		OnHpChanged.Execute(ratio);
+		OnHpChanged.Execute(ratio, MaxHp, CurrentHp);
 	}
 }

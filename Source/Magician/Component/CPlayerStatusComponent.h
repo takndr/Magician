@@ -4,7 +4,7 @@
 #include "Component/CStatusComponent.h"
 #include "CPlayerStatusComponent.generated.h"
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FMpChangedSignature, float, InPercent);
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FMpChangedSignature, float, InPercent, float, InMax, float, InCurrent);
 
 UCLASS()
 class MAGICIAN_API UCPlayerStatusComponent : public UCStatusComponent
@@ -14,6 +14,13 @@ public:
 	UCPlayerStatusComponent();
 protected:
 	virtual void BeginPlay() override;
+// =================================================================
+public:
+	float GetMaxMp() { return MaxMp; }
+	float GetCurrentMp() { return CurrentMp; }
+
+	float GetMaxXp() { return MaxXp; }
+	float GetCurrentXp() { return CurrentXp; }
 // =================================================================
 public:
 	UFUNCTION(BlueprintCallable)

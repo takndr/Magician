@@ -4,7 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "CStatusComponent.generated.h"
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FHpChangedSignature, float, InPercent);
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FHpChangedSignature, float, InPercent, float, InMax, float, InCurrent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MAGICIAN_API UCStatusComponent : public UActorComponent

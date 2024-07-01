@@ -20,6 +20,16 @@ private:
 	void SelectSkill(class UCSkillQuickSlot* SkillSlot);
 	void OffAllSkill();
 
+public:
+	UFUNCTION()
+		void UpdateHpBar(float ratio, float Max, float Current);
+
+	UFUNCTION()
+		void UpdateMpBar(float ratio, float Max, float Current);
+
+	UFUNCTION()
+		void UpdateXpBar(float ratio, float Max, float Current);
+
 private:
 	UFUNCTION()
 		void DoSkill1();
@@ -35,15 +45,6 @@ private:
 
 	UFUNCTION()
 		void DoSkill5();
-
-	UFUNCTION()
-		void UpdateHpBar(float ratio);
-	
-	UFUNCTION()
-		void UpdateMpBar(float ratio);
-		
-	UFUNCTION()
-		void UpdateXpBar(float ratio);
 
 private:
 	UPROPERTY(meta = (BindWidget))
@@ -65,13 +66,13 @@ private:
 		class UCSkillList* SkillList;
 
 	UPROPERTY(meta = (BindWidget))
-		class UProgressBar* Hp_bar;
+		class UCStatBar* HpStatBar;
 
 	UPROPERTY(meta = (BindWidget))
-		class UProgressBar* Mp_bar;
+		class UCStatBar* MpStatBar;
 
-	UPROPERTY(meta = (BindWidget))
-		class UProgressBar* Xp_bar;
+	//UPROPERTY(meta = (BindWidget))
+	//	class UProgressBar* Xp_bar;
 
 private:
 	class ACPlayer* OwningPlayer;

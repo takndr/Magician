@@ -20,9 +20,9 @@ void UCMainWidget::NativeConstruct()
 	OwningPlayer->Skill4Signature.BindUFunction(this, "DoSkill4");
 	OwningPlayer->Skill5Signature.BindUFunction(this, "DoSkill5");
 
-	UCPlayerStatusComponent* statComp = CHelpers::GetComponent<UCPlayerStatusComponent>(OwningPlayer);
-	statComp->OnHpChanged.BindUFunction(this, "UpdateHpBar");
-	statComp->OnMpChanged.BindUFunction(this, "UpdateMpBar");
+	UCPlayerStatusComponent* statusComp = CHelpers::GetComponent<UCPlayerStatusComponent>(OwningPlayer);
+	statusComp->OnHpChanged.BindUFunction(this, "UpdateHpBar");
+	statusComp->OnMpChanged.BindUFunction(this, "UpdateMpBar");
 }
 
 void UCMainWidget::ControlSkillListWidget()
@@ -105,17 +105,17 @@ void UCMainWidget::OffAllSkill()
 	Skill5->OffSelected();
 }
 
-void UCMainWidget::UpdateHpBar(float ratio)
+void UCMainWidget::UpdateHpBar(float ratio, float Max, float Current)
 {
-
+	HpStatBar->UpdateBar(ratio, Max, Current);
 }
 
-void UCMainWidget::UpdateMpBar(float ratio)
+void UCMainWidget::UpdateMpBar(float ratio, float Max, float Current)
 {
-
+	MpStatBar->UpdateBar(ratio, Max, Current);
 }
 
-void UCMainWidget::UpdateXpBar(float ratio)
+void UCMainWidget::UpdateXpBar(float ratio, float Max, float Current)
 {
 
 }
