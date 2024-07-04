@@ -24,17 +24,27 @@ void UCPlayerStatusComponent::BeginPlay()
 	ratio = FMath::Clamp(CurrentMp / MaxMp, 0.0f, 1.0f);
 	mainWidget->UpdateMpBar(ratio, MaxMp, CurrentMp);
 
+	timerHandle = UKismetSystemLibrary::K2_SetTimer(this, "RegenMana", 1, true);
+	if (CurrentMp == MaxMp)
+	{
+		UKismetSystemLibrary::K2_PauseTimerHandle(GetWorld(), timerHandle);
+	}
 }
 
 void UCPlayerStatusComponent::RegenMana()
 {
-
+	IncreaseMana(MpRegen);
 }
 
 void UCPlayerStatusComponent::IncreaseMana(float Dx)
 {
 	CurrentMp += Dx;
-	CurrentMp = FMath::Clamp(CurrentHp, 0.0f, MaxMp);
+	CurrentMp = FMath::Clamp(CurrentMp, 0.0f, MaxMp);
+
+	if (CurrentMp == MaxMp)
+	{
+		UKismetSystemLibrary::K2_PauseTimerHandle(GetWorld(), timerHandle);
+	}
 
 	if (OnMpChanged.IsBound())
 	{
@@ -45,6 +55,11 @@ void UCPlayerStatusComponent::IncreaseMana(float Dx)
 
 void UCPlayerStatusComponent::DecreaseMana(float Dx)
 {
+	if (CurrentMp == MaxMp)
+	{
+		UKismetSystemLibrary::K2_UnPauseTimerHandle(GetWorld(), timerHandle);
+	}
+
 	CurrentMp -= Dx;
 	CurrentMp = FMath::Clamp(CurrentMp, 0.0f, MaxMp);
 

@@ -10,6 +10,9 @@ class MAGICIAN_API UCStatBar : public UUserWidget
 	GENERATED_BODY()
 // ========================================================
 public:
+	friend class UCMainWidget;
+// ========================================================
+private:
 	void UpdateBar(float Percent, float Max, float Current);
 
 protected:

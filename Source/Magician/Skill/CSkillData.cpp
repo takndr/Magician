@@ -3,6 +3,7 @@
 #include "GameFramework/Character.h"
 
 #include "Skill/CSkillActor.h"
+#include "Component/CPlayerStatusComponent.h"
 
 #include "Global.h"
 
@@ -15,15 +16,13 @@ void UCSkillData::DoAction()
 {
 	CheckTrue(bCoolDown);
 	CheckNull(SkillMontage);
-
+	
 	
 
 	if (OnSkillCoolDown.IsBound())
 	{
-		CLog::Print(SkillName + " Cast");
 		OnSkillCoolDown.Broadcast();
 	}
-
 
 	OwnerCharacter->PlayAnimMontage(SkillMontage, SkillMontage->SequenceLength / CastingTime);
 }

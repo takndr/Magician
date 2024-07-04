@@ -88,7 +88,6 @@ void ACPlayer::BeginPlay()
 void ACPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -184,7 +183,15 @@ void ACPlayer::OnAttack()
 		return;
 	}
 
+	// 캐릭터가 현재 가지고 있는 마나와 스킬의 유효 마나 비교하여 적으면 못쓰게 설정
+	if (StatusComp->GetCurrentMp() < CurrentSkill->SkillMana)
+	{
+		CLog::Print("Not Enough Mana");
+		return;
+	}
+
 	StateComp->SetAttack();
+	StatusComp->DecreaseMana(CurrentSkill->SkillMana);
 	CurrentSkill->DoAction();
 }
 

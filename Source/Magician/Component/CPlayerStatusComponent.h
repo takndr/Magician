@@ -43,6 +43,8 @@ private:
 	float MaxXp;
 	float CurrentXp;
 
+	FTimerHandle timerHandle;
+
 // =================================================================
 protected:
 	UPROPERTY(EditAnywhere, Category = "Status : Mp")
