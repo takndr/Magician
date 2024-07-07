@@ -21,7 +21,7 @@ protected:
 // ========================================================
 protected:
 	UFUNCTION(BlueprintCallable)
-		void TriggerEffect(EStatusEffect effect);
+		void TriggerEffect(EStatusEffect effect, class AController* Instigator);
 
 // ========================================================
 private:

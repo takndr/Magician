@@ -3,6 +3,7 @@
 #include "Component/CStatusComponent.h"
 #include "Component/CStateComponent.h"
 #include "Component/CDamageComponent.h"
+#include "Materials/MaterialInstanceDynamic.h"
 
 #include "Enemy/CAIController.h"
 
@@ -35,6 +36,14 @@ void ACEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	for (int i = 0; i < GetMesh()->GetNumMaterials(); i++)
+	{
+		UMaterialInstanceDynamic* tempMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(i), nullptr);
+		MeshMaterials.AddUnique(tempMaterial);
+		GetMesh()->SetMaterial(i, tempMaterial);
+	}
+
+	//CLog::Print(MeshMaterials.Num());
 }
 
 float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -44,4 +53,13 @@ float ACEnemy::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AContro
 
 
 	return DamageValue;
+}
+
+void ACEnemy::ChangeBodyColor_Implementation(FLinearColor InColor , float InPow)
+{
+	for (auto material : MeshMaterials)
+	{
+		material->SetVectorParameterValue("Rim_Colour_Tint", InColor);
+		material->SetScalarParameterValue("Rim Glow Power", InPow);
+	}
 }

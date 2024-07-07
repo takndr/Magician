@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interface/ICharacter.h"
 #include "CPlayer.generated.h"
 
 DECLARE_DYNAMIC_DELEGATE(FSkill1Signature);
@@ -12,7 +13,7 @@ DECLARE_DYNAMIC_DELEGATE(FSkill5Signature);
 
 
 UCLASS()
-class MAGICIAN_API ACPlayer : public ACharacter
+class MAGICIAN_API ACPlayer : public ACharacter, public IICharacter
 {
 	GENERATED_BODY()
 public:
@@ -22,6 +23,7 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void ChangeBodyColor_Implementation(FLinearColor InColor, float InPow) override;
 // ================================================================================================
 public:
 	// Getter & Setter
@@ -79,11 +81,8 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCStateComponent* StateComp;
 
-	
-
 	UPROPERTY(VisibleDefaultsOnly)
 		class UCSkillComponent* SkillComp;
-
 
 // ================================================================================================
 public:
@@ -100,4 +99,6 @@ private:
 
 	bool bOpenSkillList = false;
 	class UCSkillData* CurrentSkill;
+
+	TArray<class UMaterialInstanceDynamic*> MeshMaterials;
 };

@@ -24,8 +24,6 @@ enum class EDamageType : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSkillCoolDownSignature);
 
-// TODO
-
 UCLASS()
 class MAGICIAN_API UCSkillData : public UDataAsset
 {

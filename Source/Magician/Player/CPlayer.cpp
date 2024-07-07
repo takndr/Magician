@@ -4,6 +4,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Materials/MaterialInstanceDynamic.h"
 
 #include "Component/COptionComponent.h"
 #include "Component/CStateComponent.h"
@@ -82,6 +83,13 @@ void ACPlayer::BeginPlay()
 		SkillHUDWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 
+	for (int i = 0; i < GetMesh()->GetNumMaterials(); i++)
+	{
+		UMaterialInstanceDynamic* tempMaterial = UMaterialInstanceDynamic::Create(GetMesh()->GetMaterial(i), nullptr);
+		MeshMaterials.AddUnique(tempMaterial);
+		GetMesh()->SetMaterial(i, tempMaterial);
+	}
+
 	Super::BeginPlay();
 }
 
@@ -113,6 +121,14 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Skill3", IE_Pressed, this, &ACPlayer::OnSkill3);
 	PlayerInputComponent->BindAction("Skill4", IE_Pressed, this, &ACPlayer::OnSkill4);
 	PlayerInputComponent->BindAction("Skill5", IE_Pressed, this, &ACPlayer::OnSkill5);
+}
+
+void ACPlayer::ChangeBodyColor_Implementation(FLinearColor InColor, float InPow)
+{
+	for (auto material : MeshMaterials)
+	{
+		material->SetVectorParameterValue("Color", InColor);
+	}
 }
 
 void ACPlayer::OnMoveForward(float Axis)

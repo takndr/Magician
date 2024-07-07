@@ -2,10 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interface/ICharacter.h"
 #include "CEnemy.generated.h"
 
 UCLASS()
-class MAGICIAN_API ACEnemy : public ACharacter
+class MAGICIAN_API ACEnemy : public ACharacter, public IICharacter
 {
 	GENERATED_BODY()
 public:
@@ -13,6 +14,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	virtual void ChangeBodyColor_Implementation(FLinearColor InColor, float InPow) override;
 // =================================================================
 public:
 	FORCEINLINE FText GetEnemyName() { return EnemyName; }
@@ -23,17 +25,7 @@ public:
 // =================================================================
 protected:
 
-// =================================================================
-protected:
-	class ACharacter* Attacker;
-	class AActor* Causer;
-	float DamageValue = 0.0f;
 
-	bool bHitNormal = false;
-	bool bHitKnockBack = false;
-
-private:
-	TArray<class ACharacter*> HittedCharacters;
 // =================================================================
 private:
 	UPROPERTY(VisibleDefaultsOnly)
@@ -68,4 +60,17 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Montage")
 		class UAnimMontage* KnockbackMontage;
+
+// =================================================================
+protected:
+	class ACharacter* Attacker;
+	class AActor* Causer;
+	float DamageValue = 0.0f;
+
+	bool bHitNormal = false;
+	bool bHitKnockBack = false;
+
+private:
+	TArray<class ACharacter*> HittedCharacters;
+	TArray<class UMaterialInstanceDynamic*> MeshMaterials;
 };

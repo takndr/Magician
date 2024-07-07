@@ -15,4 +15,9 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
+public:
+	void SetInstigator(class AController* Insti);
+
+private:
+	class AController* Instigator;
 };

@@ -24,8 +24,8 @@ void UCDamageComponent::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
-void UCDamageComponent::TriggerEffect(EStatusEffect effect)
+// AController
+void UCDamageComponent::TriggerEffect(EStatusEffect effect, class AController* Instigator)
 {
 	switch (effect)
 	{
@@ -44,21 +44,24 @@ void UCDamageComponent::TriggerEffect(EStatusEffect effect)
 
 void UCDamageComponent::BurnedEffect()
 {
-	CLog::Print("Burning!");
+	// Spawn Effector
+	FTransform transform = OwnerCharacter->GetActorTransform();
 
-	// Spawn Effector -> Owner은 OwnerCharacter로
-	// 이후 설정은 SkillEffector에 따라서 다르게 진행
-
-	// 초당 데미지 주기 -> BP로
+	ACSkillEffector* skillEffector;
+	skillEffector = GetWorld()->SpawnActorDeferred<ACSkillEffector>(Effector[EStatusEffect::Burned], transform, OwnerCharacter);
+	//skillEffector->SetInstigator();
+	skillEffector->FinishSpawning(transform);
 }
 
 void UCDamageComponent::FrozenEffect()
 {
-	CLog::Print("Frozen!");
-
 	// Spawn Effector
+	FTransform transform = OwnerCharacter->GetActorTransform();
 
-	// 캐릭터 멈추고 일정 시간 뒤에 다시 움직이게 하기 -> BP로
+	ACSkillEffector* skillEffector;
+	skillEffector = GetWorld()->SpawnActorDeferred<ACSkillEffector>(Effector[EStatusEffect::Frozen], transform, OwnerCharacter);
+	//skillEffector->SetInstigator();
+	skillEffector->FinishSpawning(transform);
 }
 
 
