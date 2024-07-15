@@ -7,12 +7,10 @@
 
 #include "Global.h"
 
-#define LOCTEXT_NAMESPACE "MyNameSpace"
-
 void UCStatBar::UpdateBar(float Percent, float Max, float Current)
 {
 	StatBar->SetPercent(Percent);
 
-	FText text = FText::Format(LOCTEXT("ExampleFText", "{0} / {1}"), Current, Max);
-	StatText->SetText(text);
+	FString str = FString::Printf(TEXT("%.0lf / %.0lf"), Current, Max);
+	StatText->SetText(FText::FromString(str));
 }

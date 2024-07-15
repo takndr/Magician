@@ -2,6 +2,7 @@
 
 #include "Player/CPlayer.h"
 #include "Component/CStateComponent.h"
+#include "Skill/CSkillData.h"
 
 #include "Global.h"
 
@@ -20,6 +21,7 @@ void UCNotifyEndAttack::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 		CheckNull(stateComp);
 
 		stateComp->SetIdle();
+		Cast<ACPlayer>(MeshComp->GetOwner())->GetCurrentSkill()->CastComplete();
 	}
 
 }

@@ -16,7 +16,7 @@ void UCPlayerStatusComponent::BeginPlay()
 
 	CurrentMp = MaxMp;
 
-	UCMainWidget* mainWidget = Cast<ACPlayer>(OwnerCharacter)->GetSkillHUDWidget();
+	UCMainWidget* mainWidget = Cast<ACPlayer>(OwnerCharacter)->GetMainHUDWidget();
 
 	float ratio = FMath::Clamp(CurrentHp / MaxHp, 0.0f, 1.0f);
 	mainWidget->UpdateHpBar(ratio, MaxHp, CurrentHp);

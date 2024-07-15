@@ -22,6 +22,22 @@ enum class EDamageType : uint8
 	None, Active, Passive
 };
 
+USTRUCT(BlueprintType)
+struct FTemplateStruct
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float SkillMana;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float SkillDamage;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+		float SkillCoolDown;
+};
+
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSkillCoolDownSignature);
 
 UCLASS()
@@ -83,12 +99,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
 		TSubclassOf<class ACSkillActor> SkillActorClass;
-
-	//UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
-	//	TSubclassOf<class ACSkillEffector> SkillEffectorClass;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
-		float SkillRange;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "SkillEffector")
 		float SkillDamage;

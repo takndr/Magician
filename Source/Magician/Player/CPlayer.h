@@ -27,7 +27,7 @@ public:
 // ================================================================================================
 public:
 	// Getter & Setter
-	class UCMainWidget* GetSkillHUDWidget() { return SkillHUDWidget; }
+	class UCMainWidget* GetMainHUDWidget() { return MainHUDWidget; }
 
 	void SetCurrentSkill(class UCSkillData* SkillData);
 	class UCSkillData* GetCurrentSkill() { return CurrentSkill; }
@@ -95,7 +95,7 @@ public:
 private:
 	TSubclassOf<class UCMainWidget> SkillHUDWidgetClass;
 
-	class UCMainWidget* SkillHUDWidget;
+	class UCMainWidget* MainHUDWidget;
 
 	bool bOpenSkillList = false;
 	class UCSkillData* CurrentSkill;

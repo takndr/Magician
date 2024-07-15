@@ -5,6 +5,7 @@
 #include "Widget/CSkillList.h"
 #include "Widget/CSkillQuickSlot.h"
 #include "Widget/CStatBar.h"
+#include "Widget/CCastingBar.h"
 
 #include "Player/CPlayer.h"
 
@@ -118,4 +119,14 @@ void UCMainWidget::UpdateMpBar(float ratio, float Max, float Current)
 void UCMainWidget::UpdateXpBar(float ratio, float Max, float Current)
 {
 
+}
+
+void UCMainWidget::CastingStart()
+{
+	CastingBar->Attach();
+}
+
+void UCMainWidget::CastingEnd()
+{
+	CastingBar->Detach();
 }

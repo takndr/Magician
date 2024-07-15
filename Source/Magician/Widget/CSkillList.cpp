@@ -1,4 +1,4 @@
-#include "Widget/CSkillList.h"
+ï»¿#include "Widget/CSkillList.h"
 
 #include "Components/TextBlock.h"
 #include "Components/Button.h"
@@ -32,12 +32,12 @@ void UCSkillList::NativeConstruct()
 
 void UCSkillList::CreateSkillWidget(class UCSkillData* SkillData)
 {
-	// SkillWidgetClassÀ¸·Î SkillWidgetÀ» »ı¼ºÇÏ°í
+	// SkillWidgetClassìœ¼ë¡œ SkillWidgetì„ ìƒì„±í•˜ê³ 
 	UCSkillWidget* skillWidget = CreateWidget<UCSkillWidget>(GetWorld(), SkillWidgetClass);
 	skillWidget->SetSkillWidget(SkillData, this);
 	SkillWidgets.AddUnique(skillWidget);
 
-	// ActiveÀÎÁö PassiveÀÎÁö È®ÀÎÇÏ¿© ¸Â´Â ÆĞ³Î¿¡ Add
+	// Activeì¸ì§€ Passiveì¸ì§€ í™•ì¸í•˜ì—¬ ë§ëŠ” íŒ¨ë„ì— Add
 	if (SkillData->SkillType == ESkillType::Active)
 	{
 		ActiveScroll->AddChild(skillWidget);
@@ -109,7 +109,6 @@ void UCSkillList::UpdateSkillPoint()
 
 	int skillPoint = skillComp->GetSkillPoints();
 
-	FString temp = "³²Àº ½ºÅ³ Æ÷ÀÎÆ® : ";
-	temp += FString::FromInt(skillPoint);
-	SkillPoint->SetText(FText::FromString(temp));
+	FString str = FString::Printf(TEXT("ë‚¨ì€ ìŠ¤í‚¬ í¬ì¸íŠ¸ : %d"), skillPoint);
+	SkillPoint->SetText(FText::FromString(str));
 }

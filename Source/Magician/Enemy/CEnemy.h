@@ -45,20 +45,20 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Names")
 		FText EnemyName;
 // =================================================================
-private:
-	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+protected:
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Montage")
 		class UAnimMontage* AttackMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Montage")
 		class UAnimMontage* SkillMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Montage")
 		class UAnimMontage* DieMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Montage")
 		class UAnimMontage* HitMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Montage")
 		class UAnimMontage* KnockbackMontage;
 
 // =================================================================

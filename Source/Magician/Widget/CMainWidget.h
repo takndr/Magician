@@ -16,6 +16,9 @@ public:
 	void SetSkillList(class UCSkillData* SkillData);
 	class UCSkillList* GetSkillList();
 
+	void CastingStart();
+	void CastingEnd();
+
 private:
 	void SelectSkill(class UCSkillQuickSlot* SkillSlot);
 	void OffAllSkill();
@@ -73,6 +76,9 @@ private:
 
 	//UPROPERTY(meta = (BindWidget))
 	//	class UProgressBar* Xp_bar;
+
+	UPROPERTY(meta = (BindWidget))
+		class UCCastingBar* CastingBar;
 
 private:
 	class ACPlayer* OwningPlayer;

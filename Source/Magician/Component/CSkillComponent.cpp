@@ -20,7 +20,7 @@ void UCSkillComponent::BeginPlay()
 	ACPlayer* ownerCharacter = Cast<ACPlayer>(GetOwner());
 
 	// 플레이어의 skill list widget을 가져오고
-	UCMainWidget* mainWidget = ownerCharacter->GetSkillHUDWidget();
+	UCMainWidget* mainWidget = ownerCharacter->GetMainHUDWidget();
 
 	// TArray<SkillData> Skills의 배열을 돌면서 skill list widget에 추가
 	for (auto skill : Skills)
@@ -48,7 +48,7 @@ void UCSkillComponent::UpgradeSkill(class UCSkillData* Skill)
 
 	// SkillWidgets 리프레쉬
 	ACPlayer* ownerCharacter = Cast<ACPlayer>(GetOwner());
-	UCMainWidget* mainWidget = ownerCharacter->GetSkillHUDWidget();
+	UCMainWidget* mainWidget = ownerCharacter->GetMainHUDWidget();
 	UCSkillList* skillList = mainWidget->GetSkillList();
 	skillList->RefreshSkillWidget();
 }
@@ -69,7 +69,7 @@ void UCSkillComponent::DowngradeSkill(class UCSkillData* Skill)
 
 	// SkillWidgets 리프레쉬
 	ACPlayer* ownerCharacter = Cast<ACPlayer>(GetOwner());
-	UCMainWidget* mainWidget = ownerCharacter->GetSkillHUDWidget();
+	UCMainWidget* mainWidget = ownerCharacter->GetMainHUDWidget();
 	UCSkillList* skillList = mainWidget->GetSkillList();
 	skillList->RefreshSkillWidget();
 }

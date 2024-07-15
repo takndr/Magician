@@ -78,9 +78,9 @@ void ACPlayer::BeginPlay()
 
 	if (!!SkillHUDWidgetClass)
 	{
-		SkillHUDWidget = CreateWidget<UCMainWidget, APlayerController>(GetController<APlayerController>(), SkillHUDWidgetClass);
-		SkillHUDWidget->AddToViewport();
-		SkillHUDWidget->SetVisibility(ESlateVisibility::Visible);
+		MainHUDWidget = CreateWidget<UCMainWidget, APlayerController>(GetController<APlayerController>(), SkillHUDWidgetClass);
+		MainHUDWidget->AddToViewport();
+		MainHUDWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 
 	for (int i = 0; i < GetMesh()->GetNumMaterials(); i++)
@@ -208,7 +208,7 @@ void ACPlayer::OnAttack()
 
 	StateComp->SetAttack();
 	StatusComp->DecreaseMana(CurrentSkill->SkillMana);
-	CurrentSkill->DoAction();
+	CurrentSkill->Casting();
 }
 
 void ACPlayer::OffAttack()
@@ -224,8 +224,8 @@ void ACPlayer::Dodge()
 
 void ACPlayer::OnSkillList()
 {
-	CheckNull(SkillHUDWidget);
-	SkillHUDWidget->ControlSkillListWidget();
+	CheckNull(MainHUDWidget);
+	MainHUDWidget->ControlSkillListWidget();
 }
 
 void ACPlayer::OnSkill1()

@@ -27,6 +27,7 @@ void UCSkillQuickSlot::NativeConstruct()
 
 	Timeline.AddInterpFloat(CoolDownCurve, OnTimeline);
 	Timeline.SetTimelineFinishedFunc(FinishTimeline);
+	
 }
 
 void UCSkillQuickSlot::DoAction()

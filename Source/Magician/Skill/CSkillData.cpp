@@ -3,6 +3,8 @@
 #include "GameFramework/Character.h"
 
 #include "Skill/CSkillActor.h"
+#include "Player/CPlayer.h"
+#include "Widget/CMainWidget.h"
 #include "Component/CPlayerStatusComponent.h"
 
 #include "Global.h"
@@ -29,12 +31,24 @@ void UCSkillData::DoAction()
 
 void UCSkillData::Casting()
 {
+	CheckTrue(bCoolDown);
+	CheckNull(SkillMontage);
 
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	player->GetMainHUDWidget()->CastingStart();
+
+	OwnerCharacter->PlayAnimMontage(SkillMontage, SkillMontage->SequenceLength / CastingTime);
 }
 
 void UCSkillData::CastComplete()
 {
+	if (OnSkillCoolDown.IsBound())
+	{
+		OnSkillCoolDown.Broadcast();
+	}
 
+	ACPlayer* player = Cast<ACPlayer>(OwnerCharacter);
+	player->GetMainHUDWidget()->CastingEnd();
 }
 
 void UCSkillData::SpawnEffector()
