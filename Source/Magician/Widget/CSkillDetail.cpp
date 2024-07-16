@@ -1,4 +1,4 @@
-#include "Widget/CSkillDetail.h"
+﻿#include "Widget/CSkillDetail.h"
 
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
@@ -7,21 +7,23 @@
 
 #include "Global.h"
 
+//FString str = FString::Printf(TEXT("%.0lf / %.0lf"), Current, Max);
+//StatText->SetText(FText::FromString(str));
+
 void UCSkillDetail::SettingDetail(UCSkillData* SkillData)
 {
-	FString temp = "";
+	FString str = "";
 
 	Icon->SetBrushFromTexture(SkillData->SkillIcon);
 
-	temp = SkillData->SkillName;
-	SkillName->SetText(FText::FromString(temp));
+	str = FString::Printf(TEXT("%s"), *SkillData->SkillName);
+	SkillName->SetText(FText::FromString(str));
 
 	if (SkillData->SkillType == ESkillType::Active)
 	{
 		SkillType->SetText(FText::FromString("Active"));
-		temp = SkillDamage->GetText().ToString();
-		temp += FString::FromInt(SkillData->SkillDamage);
-		SkillDamage->SetText(FText::FromString(temp));
+		str = FString::Printf(TEXT("스킬 데미지 : %.0lf"), SkillData->SkillDamage);
+		SkillDamage->SetText(FText::FromString(str));
 	}
 	else
 	{
@@ -29,27 +31,26 @@ void UCSkillDetail::SettingDetail(UCSkillData* SkillData)
 		SkillDamage->SetVisibility(ESlateVisibility::Hidden);
 	}
 
-	temp = SkillDes->GetText().ToString();
-	SkillDes->SetText(FText::FromString(temp));
+	//str = FString::Printf(TEXT("%s"), *SkillData->SkillDetails);
+	str = SkillData->SkillDetails.Replace(L"/n", L"\n");
+	SkillDes->SetText(FText::FromString(str));
 
-	temp = SkillLevel->GetText().ToString();
-	temp += FString::FromInt(SkillData->CurrentLevel);
-	SkillLevel->SetText(FText::FromString(temp));
+	str = FString::Printf(TEXT("현재 레벨 : %d"), SkillData->CurrentLevel);
+	SkillLevel->SetText(FText::FromString(str));
 
-	temp = SkillMLevel->GetText().ToString();
-	temp += FString::FromInt(SkillData->MaxLevel);
-	SkillMLevel->SetText(FText::FromString(temp));
+	str = FString::Printf(TEXT("최대 레벨 : %d"), SkillData->MaxLevel);
+	SkillMLevel->SetText(FText::FromString(str));
 
 	if (SkillData->RequiredSkills.Num() != 0)
 	{
-		temp = PreSkillName->GetText().ToString();
+		str = PreSkillName->GetText().ToString();
 
 		for (auto required : SkillData->RequiredSkills)
 		{
-			temp += required->SkillName + " ";
+			str += required->SkillName + " ";
 		}
 		
-		PreSkillName->SetText(FText::FromString(temp));
+		PreSkillName->SetText(FText::FromString(str));
 	}
 	else
 	{
