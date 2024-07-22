@@ -31,7 +31,6 @@ void UCSkillDetail::SettingDetail(UCSkillData* SkillData)
 		SkillDamage->SetVisibility(ESlateVisibility::Hidden);
 	}
 
-	//str = FString::Printf(TEXT("%s"), *SkillData->SkillDetails);
 	str = SkillData->SkillDetails.Replace(L"/n", L"\n");
 	SkillDes->SetText(FText::FromString(str));
 

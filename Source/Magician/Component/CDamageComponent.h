@@ -7,7 +7,7 @@
 UENUM(BlueprintType)
 enum class EStatusEffect : uint8
 {
-	None, Burned, Frozen
+	None, Burned, Frozen, Dot, End
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -21,7 +21,7 @@ protected:
 // ========================================================
 protected:
 	UFUNCTION(BlueprintCallable)
-		void TriggerEffect(EStatusEffect effect, class AController* Instigator);
+		EStatusEffect TriggerEffect(EStatusEffect effect, class AController* Instigator);
 
 // ========================================================
 private:

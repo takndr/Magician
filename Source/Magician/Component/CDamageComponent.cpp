@@ -25,12 +25,10 @@ void UCDamageComponent::BeginPlay()
 	
 }
 // AController
-void UCDamageComponent::TriggerEffect(EStatusEffect effect, class AController* Instigator)
+EStatusEffect UCDamageComponent::TriggerEffect(EStatusEffect effect, class AController* Instigator)
 {
 	switch (effect)
 	{
-	case EStatusEffect::None:
-		break;
 	case EStatusEffect::Burned:
 		BurnedEffect();
 		break;
@@ -40,6 +38,8 @@ void UCDamageComponent::TriggerEffect(EStatusEffect effect, class AController* I
 	default:
 		break;
 	}
+
+	return effect;
 }
 
 void UCDamageComponent::BurnedEffect()

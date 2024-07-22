@@ -32,9 +32,6 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 		TArray<class UCSkillData*> Skills;
 
-	UPROPERTY(EditDefaultsOnly)
-		TArray<class AActor*> SkillsTest;
-
 //===================================================================
 
 };
